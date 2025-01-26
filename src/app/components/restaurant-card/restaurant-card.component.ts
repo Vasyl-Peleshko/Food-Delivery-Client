@@ -1,0 +1,34 @@
+import { Component } from '@angular/core';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import {NgFor } from '@angular/common'; 
+import { Restaurant } from '../../interfaces';
+
+@Component({
+  selector: 'fd-restaurant-card',
+  imports: [MatCardModule, MatChipsModule, MatProgressBarModule, MatIconModule, NgFor],
+  templateUrl: './restaurant-card.component.html',
+  styleUrl: './restaurant-card.component.scss'
+})
+export class RestaurantCardComponent {
+
+  restaurantData : Restaurant = {
+    name: 'Italiano2',
+    rating: 4.5,
+    reviews: 25,
+    imageUrl: 'https://i.pinimg.com/736x/a6/e1/8f/a6e18f7038d0e901d70e872f53ebf818.jpg',
+    tags: ['BURGER', 'CHICKEN', 'FAST FOOD'],
+    delivery: {
+      isFree: true,
+      icon: 'motorcycle',
+      text: 'free delivery'
+    },
+    time: {
+      icon: 'access_time',
+      text: '10-15 mins'
+    }
+  };
+
+}
