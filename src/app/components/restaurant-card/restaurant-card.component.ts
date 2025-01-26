@@ -4,7 +4,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import {NgFor } from '@angular/common'; 
-import { Restaurant } from '../../interfaces';
+import { RestaurantCardInterface } from '../../interfaces/restaurant-card.interface';
 
 @Component({
   selector: 'fd-restaurant-card',
@@ -14,7 +14,7 @@ import { Restaurant } from '../../interfaces';
 })
 export class RestaurantCardComponent {
 
-  restaurantData : Restaurant = {
+  restaurantData : RestaurantCardInterface = {
     name: 'Italiano2',
     rating: 4.5,
     reviews: 25,
