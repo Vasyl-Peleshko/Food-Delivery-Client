@@ -50,7 +50,6 @@
         height: 1.7rem;
       }
    
-
       .star-icon {
         color: #ffb400;
         font-size: 0.9rem; 
@@ -66,12 +65,10 @@
         vertical-align:super;
         margin-right: 0.3rem;
         padding-bottom: 0.2rem;
-      }
-      
+      } 
   }
 
-
-mat-card-content{
+  mat-card-content{
     padding-left: 0.7rem;
     
     p{
@@ -93,8 +90,7 @@ mat-card-content{
         line-height: 1; 
         display: inline-flex; 
         align-items: center; 
-        justify-content: center;
-     
+        justify-content: center; 
       }
 
       .info-row {
@@ -116,14 +112,12 @@ mat-card-content{
         font-size: 0.75rem; 
         color: #ADADB8; 
         margin-right: 0.3rem;
-      }
-      
+      }   
 }
 
 mat-card-footer {
     padding-left: 0.7rem;
 }
-
 
 ::ng-deep mat-chip  {
     background-color: #474755 !important;
@@ -132,7 +126,6 @@ mat-card-footer {
     .mdc-evolution-chip__text-label{
         font-size: 0.5rem !important;
         color: #ffffff !important;
-
     }
 
     height: 1.5rem !important;
