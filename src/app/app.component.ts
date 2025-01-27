@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RestaurantCardComponent } from './components/primary-card/restaurant-card.component';
+import { CardConfigInterface, PrimaryCardComponent } from './components/primary-card/primary-card.component';
 import { ItemCardInterface } from './shared/interfaces/restaurant-card.interface';
 import { NgFor } from '@angular/common'; 
+import { SecondaryCardComponent } from './components/secondary-card/secondary-card.component';
 
 @Component({
   selector: 'fd-root',
-  imports: [RouterOutlet, MatSlideToggleModule, RestaurantCardComponent, NgFor],
+  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, NgFor],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -19,8 +20,8 @@ export class AppComponent {
       name: 'Italiano1',
       rating: 4.5,
       reviews: 749,
-      imageUrl: 'https://i.pinimg.com/736x/a6/e1/8f/a6e18f7038d0e901d70e872f53ebf818.jpg',
-      tags: ['BURGER', 'CHICKEN', 'FAST FOOD'],
+      imageUrl: 'https://i.pinimg.com/236x/6e/b6/91/6eb6911ae012db6c355671b231003d6e.jpg',
+      tags: ['COFFEE', 'DRINKS'],
       delivery: {
         isFree: true,
         icon: 'motorcycle',
@@ -36,7 +37,7 @@ export class AppComponent {
       rating: 4.5,
       reviews: 749,
       imageUrl: 'https://i.pinimg.com/736x/a6/e1/8f/a6e18f7038d0e901d70e872f53ebf818.jpg',
-      tags: ['BURGER', 'CHICKEN', 'FAST FOOD'],
+      tags: ['BURGER', 'CHICKEN'],
       delivery: {
         isFree: true,
         icon: 'motorcycle',
@@ -48,6 +49,7 @@ export class AppComponent {
       }
     },
   ]
+
   foodItem: ItemCardInterface = {
     name: 'Spageti',
     rating: 4.5,
@@ -57,7 +59,8 @@ export class AppComponent {
     description: 'Italian Burger.'
   };
   
-  restaurantCardConfig = {
+  restaurantCardConfig : CardConfigInterface = {
+    isFoodItem: false,
     isPriceVisible: false,
     isRatingVisible: true,
     isTagsVisible: true,
@@ -65,7 +68,8 @@ export class AppComponent {
     isDescriptionVisible: false,
   };
 
-  foodCardConfig = {
+  foodCardConfig : CardConfigInterface = {
+    isFoodItem: true,
     isPriceVisible: true,
     isRatingVisible: true,
     isTagsVisible: false,

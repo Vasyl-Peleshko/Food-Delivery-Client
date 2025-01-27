@@ -1,13 +1,10 @@
-<!-- <fd-restaurant-card></fd-restaurant-card> -->
 <div *ngFor="let restaurant of restaurants">
-    <fd-restaurant-card 
+    <fd-secondary-card 
     [itemData]="restaurant"
     [config]="restaurantCardConfig"
-    ></fd-restaurant-card>
+    ></fd-secondary-card>
 </div>
-<fd-restaurant-card 
+<fd-secondary-card 
 [itemData]="foodItem"
 [config]="foodCardConfig"
-></fd-restaurant-card>
-
-  
+></fd-secondary-card>
