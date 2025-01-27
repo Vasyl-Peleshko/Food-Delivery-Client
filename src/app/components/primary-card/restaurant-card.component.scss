@@ -66,13 +66,43 @@
         margin-right: 0.3rem;
         padding-bottom: 0.2rem;
       } 
+
+      .price {
+        display: inline-flex;
+        background-color: #FFFFFF;
+        border-radius: 2rem;
+        margin: 0;
+        position: absolute;
+        top: 15%;
+        left: 4%;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        color: black;
+        height: 1.7rem;
+        width: 3rem;
+      }
+      .rating-below {
+        display: inline-flex;
+        position: absolute;
+        top:85%;
+        left:4%;
+        background-color: #474755;
+        border-radius: 2rem;
+        margin: 0;
+        align-items: center;
+        font-size: 0.8rem; 
+        color: white;
+        padding-left: 0.5rem;
+        height: 1.7rem;
+      }
   }
 
   mat-card-content{
     padding-left: 0.7rem;
     
     p{
-        margin-top:0.4rem;
+        margin-top:0.6rem;
         margin-bottom: 0.2rem;
     }
 
@@ -113,6 +143,11 @@
         color: #ADADB8; 
         margin-right: 0.3rem;
       }   
+
+      .description-text{
+        margin-bottom: 0.5rem;
+        font-size: 0.75rem;
+      }
 }
 
 mat-card-footer {
