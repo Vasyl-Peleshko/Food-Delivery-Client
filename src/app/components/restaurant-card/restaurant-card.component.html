@@ -7,8 +7,8 @@
       <p class="rating">
         {{ restaurantData.rating }} 
         <mat-icon class="star-icon">star</mat-icon> 
-        <span class="exponent">({{ restaurantData.reviews }}+)</span>
-      </p>
+        <span class="exponent">({{ restaurantData.reviews | reviewFormatter }})</span>
+    </p>
     </div>
   
     <mat-card-content>
