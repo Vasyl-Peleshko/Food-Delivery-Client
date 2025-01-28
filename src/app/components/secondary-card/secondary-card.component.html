@@ -1,0 +1,55 @@
+<mat-card class="food-card" appearance="outlined">
+  <div class="card-image">
+      <ng-container *ngIf="!config.isFoodItem; else foodTemplate">
+        <img [src]="itemData.imageUrl" alt="Food image" class="non-food-image">
+      </ng-container>
+      <ng-template #foodTemplate>
+        <img [src]="itemData.imageUrl" alt="Food image" class="food-image">
+      </ng-template>
+      <ng-container *ngIf="!config.isFoodItem" >
+        <button mat-icon-button class="favorite-button">
+          <mat-icon>favorite</mat-icon>
+        </button> 
+      </ng-container>
+      <ng-container *ngIf="itemData.price; else ratingTemplate">
+        <p class="price">
+          ${{ itemData.price }}
+        </p>
+      </ng-container>
+      <ng-template #ratingTemplate>
+        <p class="rating">
+          {{ itemData.rating }}
+        </p>
+      </ng-template>
+      <p *ngIf="itemData.price" class="rating-below">
+        {{ itemData.rating }}
+        <mat-icon class="star-icon">star</mat-icon>
+        <span class="exponent">({{ itemData.reviews | reviewFormatter }})</span>
+      </p>
+    </div>
+    
+    <mat-card-content>
+      <p>
+        {{ itemData.name }}
+        <mat-icon class="check-icon">check</mat-icon>
+      </p>
+      <div class="info-row" *ngIf="config.isDeliveryAndTimeVisible || config.isDescriptionVisible">
+        <ng-container *ngIf="config.isDeliveryAndTimeVisible; else descriptionTemplate">
+          <mat-icon class="delivery-icon">{{ itemData.delivery?.icon }}</mat-icon>
+          <span class="delivery-text">{{ itemData.delivery?.text }}</span>
+          <mat-icon class="time-icon">{{ itemData.time?.icon }}</mat-icon>
+          <span class="time-text">{{ itemData.time?.text }}</span>
+        </ng-container> 
+        <ng-template #descriptionTemplate>
+          <span class="description-text">{{ itemData.description }}</span>
+        </ng-template>
+      </div>   
+    </mat-card-content>
+ 
+    <mat-card-footer>
+      <mat-chip-set *ngIf="config.isTagsVisible">
+        <mat-chip class="food-card" *ngFor="let tag of itemData.tags">{{ tag }}</mat-chip>
+      </mat-chip-set>
+    </mat-card-footer>
+  </mat-card>
+  

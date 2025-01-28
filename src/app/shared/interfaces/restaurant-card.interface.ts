@@ -1,11 +1,7 @@
-export interface RestaurantCardInterface {
+interface BaseCardInterface {
     name: string;
     rating: number;
     reviews: number;
-    imageUrl: string;
-    tags: string[];
-    delivery: DeliveryDataInterface;
-    time: TimeInterface;
 }
 
 export interface TimeInterface {
@@ -19,3 +15,11 @@ export interface DeliveryDataInterface {
     text: string;
 }
   
+export interface ItemCardInterface extends BaseCardInterface {
+    imageUrl?: string;
+    tags?: string[];
+    delivery?: DeliveryDataInterface;
+    time?: TimeInterface;
+    price?: number;
+    description?: string;
+}

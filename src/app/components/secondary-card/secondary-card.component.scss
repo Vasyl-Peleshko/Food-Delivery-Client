@@ -1,6 +1,6 @@
 .food-card {
-    max-width: 16.125rem;
-    max-height: 14rem;
+    max-width: 8.125rem;
+    max-height: 9rem;
     margin-left: 1.6rem;
     margin-top: 1.6rem;
     overflow: hidden;
@@ -11,14 +11,25 @@
 .card-image {
     position: relative;
     width: 100%; 
-    height: 8rem; 
+    height: 6rem;
 
-    img {
+     .non-food-image {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      width: 50%;
+      height: 80%;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+    
+    .food-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 1rem;
     }
-    
+
     .favorite-button {
       position: absolute;
       background: none; 
@@ -26,7 +37,7 @@
       border-radius: 0; 
       padding: 0; 
       min-width: auto; 
-      top: 15%;
+      top: 10%;
       right: 7%;
       border-radius: 50%;
     }
@@ -37,42 +48,75 @@
 
     .rating {
         display: inline-flex;
-        background-color: #FFFFFF;
-        border-radius: 2rem;
+        background-color: #FFC529;
+        border-radius: 0.5rem;
         margin: 0;
         position: absolute;
-        top:15%;
-        left: 4%;
+        top:5%;
+        left: 45%;
         align-items: center;
-        font-size: 0.8rem; 
-        color: black;
-        padding-left: 0.5rem;
-        height: 1.7rem;
+        justify-content: center;
+        font-size: 0.6rem; 
+        color: white;
+        height: 1.2rem;
+        width: 1.2rem;
       }
    
       .star-icon {
         color: #ffb400;
-        font-size: 0.9rem; 
-        margin-left: 0.3rem; 
-        margin-top: 0.7rem;
+        font-size: 0.5rem; 
+        margin-left: 0.1rem; 
+        margin-top: 1.1rem;
         padding: 0;
         margin-right: 0;
-        width: 1rem;
+        width: 0.5rem;
       }
       
       .exponent {
         font-size: 0.4rem;
         vertical-align:super;
-        margin-right: 0.3rem;
+        margin-right: 0.5rem;
         padding-bottom: 0.2rem;
       } 
+
+      .price {
+        display: inline-flex;
+        background-color: #FFFFFF;
+        border-radius: 2rem;
+        margin: 0;
+        position: absolute;
+        top: 10%;
+        left: 4%;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.4rem;
+        color: black;
+        height: 1rem;
+        width: 1.5rem;
+      }
+      
+      .rating-below {
+        display: inline-flex;
+        position: absolute;
+        top:90%;
+        left:4%;
+        background-color: #474755;
+        border-radius: 2rem;
+        margin: 0;
+        align-items: center;
+        font-size: 0.5rem; 
+        color: white;
+        padding-left: 0.5rem;
+        height: 1rem;
+      }
   }
 
   mat-card-content{
     padding-left: 0.7rem;
+    font-size: 0.8rem;
     
     p{
-        margin-top:0.4rem;
+        margin-top:0.8rem;
         margin-bottom: 0.2rem;
     }
 
@@ -80,6 +124,7 @@
         width: 0.5rem;
         height: 0.5rem;
     }
+
     .check-icon {
         font-size: 0.3rem; 
         vertical-align: middle; 
@@ -100,19 +145,26 @@
       }
       
       .delivery-icon, .time-icon {
-        font-size: 0.9rem; 
+        font-size: 0.4rem; 
         vertical-align: middle; 
         line-height: 1; 
-        width: 1rem;
-        height: 1rem;
+        width: 0.5rem;
+        height: 0.5rem;
         color: #FE724C; 
+        padding-top: 0.2rem;
       }
       
       .delivery-text, .time-text {
-        font-size: 0.75rem; 
+        font-size: 0.4rem; 
         color: #ADADB8; 
-        margin-right: 0.3rem;
+        margin-right: 0.1rem;
+        white-space: nowrap;
       }   
+
+      .description-text{
+        margin-bottom: 0.5rem;
+        font-size: 0.5rem;
+      }
 }
 
 mat-card-footer {
@@ -124,11 +176,11 @@ mat-card-footer {
     border: none !important;
     overflow: hidden;
     .mdc-evolution-chip__text-label{
-        font-size: 0.5rem !important;
+        font-size: 0.3rem !important;
         color: #ffffff !important;
     }
 
-    height: 1.5rem !important;
+    height: 1rem !important;
     margin-bottom: 0.5rem !important;
 }
 
