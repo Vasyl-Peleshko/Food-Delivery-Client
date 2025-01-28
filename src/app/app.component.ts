@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CardConfigInterface, PrimaryCardComponent } from './components/primary-card/primary-card.component';
 import { ItemCardInterface } from './shared/interfaces/restaurant-card.interface';
 import { NgFor } from '@angular/common'; 
 import { SecondaryCardComponent } from './components/secondary-card/secondary-card.component';
+import { RestaurantService } from './shared/services/restaurant.service';
 
 @Component({
   selector: 'fd-root',
@@ -12,52 +13,20 @@ import { SecondaryCardComponent } from './components/secondary-card/secondary-ca
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'food-delivery';
+  restaurants: ItemCardInterface[] = [];
 
-   restaurants : ItemCardInterface[] = [
-   {
-      name: 'Italiano1',
-      rating: 4.5,
-      reviews: 749,
-      imageUrl: 'https://i.pinimg.com/236x/6e/b6/91/6eb6911ae012db6c355671b231003d6e.jpg',
-      tags: ['COFFEE', 'DRINKS'],
-      delivery: {
-        isFree: true,
-        icon: 'motorcycle',
-        text: 'free delivery'
-      },
-      time: {
-        icon: 'access_time',
-        text: '10-15 mins'
-      }
-    },
-    {
-      name: 'Italiano2',
-      rating: 4.5,
-      reviews: 749,
-      imageUrl: 'https://i.pinimg.com/736x/a6/e1/8f/a6e18f7038d0e901d70e872f53ebf818.jpg',
-      tags: ['BURGER', 'CHICKEN'],
-      delivery: {
-        isFree: true,
-        icon: 'motorcycle',
-        text: 'free delivery'
-      },
-      time: {
-        icon: 'access_time',
-        text: '10-15 mins'
-      }
-    },
-  ]
+  constructor(private restaurantsService: RestaurantService) {}
 
-  foodItem: ItemCardInterface = {
-    name: 'Spageti',
-    rating: 4.5,
-    reviews: 749,
-    imageUrl: 'https://i.pinimg.com/736x/a6/e1/8f/a6e18f7038d0e901d70e872f53ebf818.jpg',
-    price: 12.99,
-    description: 'Italian Burger.'
-  };
+  ngOnInit(): void {
+    this.restaurants = this.restaurantsService.getRestaurants();
+  }
+
+  addToFavorites(restaurant: ItemCardInterface): void {
+    this.restaurantsService.addToFavorites(restaurant);
+    console.log(`${restaurant.name} added to favorites!`);
+  }
   
   restaurantCardConfig : CardConfigInterface = {
     isFoodItem: false,

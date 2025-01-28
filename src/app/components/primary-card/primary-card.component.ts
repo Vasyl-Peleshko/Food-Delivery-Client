@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
@@ -25,4 +25,9 @@ export interface CardConfigInterface {
 export class PrimaryCardComponent {
   @Input() config: CardConfigInterface = {}; 
   @Input() itemData! : ItemCardInterface;  
+  @Output() favoriteClicked = new EventEmitter<ItemCardInterface>();
+  
+  addToFavorites(): void {
+    this.favoriteClicked.emit(this.itemData);
+  }
 }
