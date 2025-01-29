@@ -15,10 +15,8 @@ export class RestaurantService {
   constructor(private http: HttpClient) {}
 
   async getRestaurants(): Promise<ItemCardInterface[]> {
-    console.log('Making HTTP GET request to', this.apiUrl);
     try {
       const response = await lastValueFrom(this.http.get<ItemCardInterface[]>(this.apiUrl));
-      console.log('Received response:', response);
       return response;
     } catch (error) {
       console.error('Error occurred while fetching restaurants:', error);

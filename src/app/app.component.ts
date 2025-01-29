@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       this.restaurants = await this.restaurantsService.getRestaurants();
-      console.log(this.restaurants);
     } catch (error) {
       console.error('Помилка при отриманні ресторанів:', error);
     }
