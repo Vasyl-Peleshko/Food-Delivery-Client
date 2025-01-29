@@ -1,7 +1,7 @@
 <mat-card class="food-card" appearance="outlined">
     <div class="card-image">
       <img [src]="itemData.imageUrl" alt="Food image">
-      <button mat-icon-button class="favorite-button">
+      <button mat-icon-button class="favorite-button" (click)="addToFavorites()">
         <mat-icon>favorite</mat-icon>
       </button>
       <ng-container *ngIf="itemData.price; else ratingTemplate">
@@ -47,4 +47,3 @@
       </mat-chip-set>
     </mat-card-footer>
   </mat-card>
-  

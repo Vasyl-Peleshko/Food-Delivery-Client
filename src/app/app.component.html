@@ -1,10 +1,7 @@
 <div *ngFor="let restaurant of restaurants">
-    <fd-secondary-card 
-    [itemData]="restaurant"
-    [config]="restaurantCardConfig"
-    ></fd-secondary-card>
+    <fd-primary-card 
+        [itemData]="restaurant"
+        [config]="restaurantCardConfig"
+        (favoriteClicked)="addToFavorites($event)"
+    ></fd-primary-card>
 </div>
-<fd-secondary-card 
-[itemData]="foodItem"
-[config]="foodCardConfig"
-></fd-secondary-card>
