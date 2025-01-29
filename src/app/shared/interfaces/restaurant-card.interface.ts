@@ -1,25 +1,18 @@
 interface BaseCardInterface {
     name: string;
     rating: number;
-    reviews: number;
-}
-
-export interface TimeInterface {
-    icon: string;
-    text: string;
+    feedbacks: number;
 }
 
 export interface DeliveryDataInterface {
-    isFree: boolean;
-    icon: string;
-    text: string;
+    cost: string;
+    time: string;
 }
   
 export interface ItemCardInterface extends BaseCardInterface {
-    imageUrl?: string;
-    tags?: string[];
+    imgUrl?: string;
+    categories?: string[];
     delivery?: DeliveryDataInterface;
-    time?: TimeInterface;
     price?: number;
     description?: string;
 }

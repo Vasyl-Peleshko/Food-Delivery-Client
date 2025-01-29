@@ -19,8 +19,13 @@ export class AppComponent implements OnInit {
 
   constructor(private restaurantsService: RestaurantService) {}
 
-  ngOnInit(): void {
-    this.restaurants = this.restaurantsService.getRestaurants();
+  async ngOnInit(): Promise<void> {
+    try {
+      this.restaurants = await this.restaurantsService.getRestaurants();
+      console.log(this.restaurants);
+    } catch (error) {
+      console.error('Помилка при отриманні ресторанів:', error);
+    }
   }
 
   addToFavorites(restaurant: ItemCardInterface): void {
