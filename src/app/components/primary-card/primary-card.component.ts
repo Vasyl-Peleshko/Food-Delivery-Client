@@ -27,6 +27,9 @@ export class PrimaryCardComponent {
   @Input() itemData! : ItemCardInterface;  
   @Output() favoriteClicked = new EventEmitter<ItemCardInterface>();
   
+  ngOnInit() {
+    console.log(this.itemData);  // Виводить ресторан у консоль
+  }
   addToFavorites(): void {
     this.favoriteClicked.emit(this.itemData);
   }

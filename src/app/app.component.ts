@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CardConfigInterface, PrimaryCardComponent } from './components/primary-card/primary-card.component';
@@ -17,12 +17,19 @@ export class AppComponent implements OnInit {
   title = 'food-delivery';
   restaurants: ItemCardInterface[] = [];
 
-  constructor(private restaurantsService: RestaurantService) {}
+  constructor(private restaurantsService: RestaurantService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.restaurants = this.restaurantsService.getRestaurants();
+    this.restaurantsService.getRestaurants().subscribe({
+      next: (data) => {
+        this.restaurants = data;
+        this.cdr.detectChanges();  
+      },
+      error: (err) => {
+        console.error('Помилка при отриманні ресторанів:', err);
+      }
+    });
   }
-
   addToFavorites(restaurant: ItemCardInterface): void {
     this.restaurantsService.addToFavorites(restaurant);
     console.log(`${restaurant.name} added to favorites!`);
