@@ -1,4 +1,4 @@
-<div *ngFor="let restaurant of restaurants">
+<div *ngFor="let restaurant of restaurants$ | async">
     <fd-primary-card 
         [itemData]="restaurant"
         [config]="restaurantCardConfig"
