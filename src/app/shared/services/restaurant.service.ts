@@ -28,6 +28,10 @@ export class RestaurantService {
     return this.restaurantsCache.asObservable();
   }
 
+  getRestaurantById(id: string): Observable<ItemCardInterface> {
+    return this.http.get<ItemCardInterface>(`${this.apiUrl}/${id}`);
+  }
+
   addToFavorites(restaurant: ItemCardInterface): void {
     if (!this.favoriteRestaurants.includes(restaurant)) {
       this.favoriteRestaurants.push(restaurant);
