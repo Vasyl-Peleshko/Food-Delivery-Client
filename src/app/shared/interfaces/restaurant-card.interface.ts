@@ -2,6 +2,7 @@ interface BaseCardInterface {
     name: string;
     rating: number;
     feedbacks: number;
+    id: string;
 }
 
 export interface DeliveryDataInterface {

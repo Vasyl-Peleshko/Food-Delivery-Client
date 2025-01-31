@@ -27,40 +27,53 @@
 
     <!-- FEATURED RESTAURANTS SECTION -->
     <div>
-        <span class="text-white text-xl font-light ml-10">
+        <span class="text-white text-xl font-light ml-3">
             Featured restaurants
         </span>
     </div>
 
     <!-- RESTAURANT CARDS SCROLLABLE CONTAINER -->
-    <div class="flex overflow-x-auto pb-4">
-        <div *ngFor="let restaurant of restaurants$ | async" class="flex-shrink-0 w-60 p-2">
-            <fd-primary-card 
-                [itemData]="restaurant"
-                [config]="restaurantCardConfig"
-                (favoriteClicked)="addToFavorites($event)"
-            ></fd-primary-card>
+    <div class="flex overflow-x-auto">
+        <div 
+          *ngFor="let restaurant of restaurants$ | async" 
+          class="flex-shrink-0 w-60 p-2"
+          (click)="navigateToRestaurant(restaurant.id)"
+          (keydown.enter)="navigateToRestaurant(restaurant.id)"
+          (keydown.space)="navigateToRestaurant(restaurant.id)"
+          tabindex="0"
+        >
+          <fd-primary-card 
+            [itemData]="restaurant"
+            [config]="restaurantCardConfig"
+            (favoriteClicked)="addToFavorites($event)"
+          ></fd-primary-card>
         </div>
     </div>
 
     <!-- POPULAR ITEMS SECTION -->
     <div>
-        <span class="text-white text-xl font-light ml-10">
+        <span class="text-white text-xl font-light ml-3">
             Popular items
         </span>
     </div>
 
     <!-- POPULAR ITEMS SCROLLABLE CONTAINER -->
     <div class="flex overflow-x-auto">
-        <div *ngFor="let restaurant of restaurants$ | async" class="flex-shrink-0 w-60 p-2">
-            <fd-primary-card 
-                [itemData]="restaurant"
-                [config]="restaurantCardConfig"
-                (favoriteClicked)="addToFavorites($event)"
-            ></fd-primary-card>
+        <div 
+          *ngFor="let restaurant of restaurants$ | async" 
+          class="flex-shrink-0 w-60 p-2"
+          (click)="navigateToRestaurant(restaurant.id)"
+          (keydown.enter)="navigateToRestaurant(restaurant.id)"
+          (keydown.space)="navigateToRestaurant(restaurant.id)"
+          tabindex="0"
+        >
+          <fd-primary-card 
+            [itemData]="restaurant"
+            [config]="restaurantCardConfig"
+            (favoriteClicked)="addToFavorites($event)"
+          ></fd-primary-card>
         </div>
     </div>
-
 </div>
 
 <!-- FOOTER: Navigation bar with icons and notifications -->

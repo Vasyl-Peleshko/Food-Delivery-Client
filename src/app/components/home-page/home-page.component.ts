@@ -4,6 +4,7 @@ import { ItemCardInterface } from '../../shared/interfaces/restaurant-card.inter
 import { RestaurantService } from '../../shared/services/restaurant.service';
 import { CardConfigInterface, PrimaryCardComponent } from '../primary-card/primary-card.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fd-home-page',
@@ -14,7 +15,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 export class HomePageComponent {
  restaurants$!: Observable<ItemCardInterface[]>;
 
-  constructor(private readonly restaurantsService: RestaurantService) {}
+  constructor(private readonly restaurantsService: RestaurantService, private router: Router) {}
 
   ngOnInit(): void {
     this.restaurants$ = this.restaurantsService.getCachedRestaurants();
@@ -26,6 +27,10 @@ export class HomePageComponent {
     console.log(`${restaurant.name} added to favorites!`);
   }
   
+  navigateToRestaurant(id: string): void {
+    this.router.navigate([`/restaurants/${id}`]);
+  }
+
   restaurantCardConfig : CardConfigInterface = {
     isFoodItem: false,
     isPriceVisible: false,
