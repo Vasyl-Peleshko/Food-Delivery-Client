@@ -1,7 +1,1 @@
-<div *ngFor="let restaurant of restaurants$ | async">
-    <fd-primary-card 
-        [itemData]="restaurant"
-        [config]="restaurantCardConfig"
-        (favoriteClicked)="addToFavorites($event)"
-    ></fd-primary-card>
-</div>
+<router-outlet></router-outlet>
