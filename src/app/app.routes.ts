@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { environment } from './shared/routes/environmentRoutes';
-import { restaurantRoutes } from './shared/routes/restaurant.routes';
+import { RoutingConstants } from './shared/constants/routing-constants';
 
 export const routes: Routes = [
-  { path: '', redirectTo: environment.routes.home, pathMatch: 'full' }, 
-  { path: environment.routes.home, component: HomePageComponent },
-  ...restaurantRoutes,
-  { path: '**', redirectTo: environment.routes.home, pathMatch: 'full' },
+  { path: '', redirectTo: RoutingConstants.HOME, pathMatch: 'full' }, 
+  { path: RoutingConstants.HOME, component: HomePageComponent },
+  { 
+    path: RoutingConstants.RESTAURANTS, 
+    loadChildren: () => import('./components/restaurant-details/restaurant.routes')
+      .then(m => m.restaurantRoutes) 
+  },  
+  { path: '**', redirectTo: RoutingConstants.HOME, pathMatch: 'full' },
 ];

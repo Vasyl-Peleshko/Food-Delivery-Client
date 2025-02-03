@@ -12,7 +12,7 @@ export class RestaurantExistsGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     const restaurantId = route.paramMap.get('id');
-
+    
     return this.restaurantService.getRestaurants().pipe(
       map(restaurants => {
         const exists = restaurants.some(r => r.id === restaurantId);

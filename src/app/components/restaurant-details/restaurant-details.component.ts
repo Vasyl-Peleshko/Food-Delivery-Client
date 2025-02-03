@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ItemCardInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -13,15 +13,13 @@ import { CardConfigInterface, PrimaryCardComponent } from '../primary-card/prima
   templateUrl: './restaurant-details.component.html',
   styleUrl: './restaurant-details.component.scss'
 })
-export class RestaurantDetailsComponent{
-  restaurant$: Observable<ItemCardInterface>;
+export class RestaurantDetailsComponent implements OnInit{
+  restaurant$!: Observable<ItemCardInterface>;
 
-  constructor(private route: ActivatedRoute) {
-    this.restaurant$ = this.route.data.pipe(map(data => data['restaurant']));    
+  constructor(private route: ActivatedRoute) {}
 
-    this.restaurant$.subscribe(restaurants => {
-      console.log('Ресторани:', restaurants);
-    });
+  ngOnInit(): void {
+    this.restaurant$ = this.route.data.pipe(map(data => data['restaurant']));
   }
 
   foodItems: ItemCardInterface[] = [

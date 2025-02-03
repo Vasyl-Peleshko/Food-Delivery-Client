@@ -13,6 +13,7 @@ export class RestaurantResolver implements Resolve<ItemCardInterface | null> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<ItemCardInterface | null> {
     const id = route.paramMap.get('id')!;
+    
     return this.restaurantService.getRestaurantById(id).pipe(
       catchError(() => of(null)) 
     );
