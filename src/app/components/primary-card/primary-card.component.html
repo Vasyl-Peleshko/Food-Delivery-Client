@@ -11,7 +11,7 @@
       </ng-container>
       <ng-template #ratingTemplate>
         <p class="rating">
-          {{ itemData.rating }}
+          {{ itemData?.rating }}
           <mat-icon class="star-icon">star</mat-icon>
           <span class="exponent">({{ itemData.feedbacks | reviewFormatter }})</span>
         </p>

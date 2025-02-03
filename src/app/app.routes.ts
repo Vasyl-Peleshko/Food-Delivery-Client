@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { RestaurantDetailsComponent } from './components/restaurant-details/restaurant-details.component';
-import { RestaurantResolver } from './components/restaurant-details/restaurant.resolver';
+import { environment } from './shared/routes/environmentRoutes';
+import { restaurantRoutes } from './shared/routes/restaurant.routes';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' }, 
-  { path: 'home', component: HomePageComponent },
-  { path: 'restaurants/:id', component: RestaurantDetailsComponent, resolve: { restaurant: RestaurantResolver } },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: environment.routes.home, pathMatch: 'full' }, 
+  { path: environment.routes.home, component: HomePageComponent },
+  ...restaurantRoutes,
+  { path: '**', redirectTo: environment.routes.home, pathMatch: 'full' },
 ];

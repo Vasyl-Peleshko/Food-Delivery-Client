@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ItemCardInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { RestaurantService } from '../../shared/services/restaurant.service';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
  restaurants$!: Observable<ItemCardInterface[]>;
 
   constructor(private readonly restaurantsService: RestaurantService, private router: Router) {}
