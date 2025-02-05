@@ -6,6 +6,7 @@ import { CardConfigInterface, PrimaryCardComponent } from '../primary-card/prima
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'fd-home-page',
@@ -16,7 +17,11 @@ import { RoutingConstants } from '../../shared/constants/routing-constants';
 export class HomePageComponent implements OnInit {
  restaurants$!: Observable<ItemCardInterface[]>;
 
-  constructor(private readonly restaurantsService: RestaurantService, private router: Router) {}
+  constructor(
+    private readonly restaurantsService: RestaurantService,
+    private router: Router,
+    private readonly authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.restaurants$ = this.restaurantsService.getCachedRestaurants();
@@ -30,6 +35,11 @@ export class HomePageComponent implements OnInit {
   
   navigateToRestaurant(id: string): void {
     this.router.navigate([`/${RoutingConstants.RESTAURANTS}/${id}`]);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate([`${RoutingConstants.LOGIN}`]); 
   }
 
   restaurantCardConfig : CardConfigInterface = {
