@@ -5,10 +5,12 @@ import { PrimaryCardComponent } from './components/primary-card/primary-card.com
 import { AsyncPipe, CommonModule } from '@angular/common'; 
 import { SecondaryCardComponent } from './components/secondary-card/secondary-card.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './components/signup/signup.component';
 
 @Component({
   selector: 'fd-root',
-  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent],
+  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
