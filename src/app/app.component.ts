@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CardConfigInterface, PrimaryCardComponent } from './components/primary-card/primary-card.component';
+import { PrimaryCardComponent } from './components/primary-card/primary-card.component';
 import { AsyncPipe, CommonModule } from '@angular/common'; 
 import { SecondaryCardComponent } from './components/secondary-card/secondary-card.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -12,15 +12,4 @@ import { HomePageComponent } from './components/home-page/home-page.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'food-delivery';
-
-  foodCardConfig : CardConfigInterface = {
-    isFoodItem: true,
-    isPriceVisible: true,
-    isRatingVisible: true,
-    isTagsVisible: false,
-    isDeliveryAndTimeVisible: false,
-    isDescriptionVisible: true,
-  }
-}
+export class AppComponent {}

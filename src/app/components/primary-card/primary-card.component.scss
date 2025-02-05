@@ -1,11 +1,15 @@
 .food-card {
     max-width: 16.125rem;
     max-height: 14rem;
-    margin-left: 1.6rem;
     margin-top: 0rem;
     overflow: hidden;
     background-color: #393948;
     color: white;
+}
+
+.mat-mdc-card-outlined{
+  border: none;
+  border-width: 0; 
 }
 
 .card-image {
@@ -148,6 +152,11 @@
       .description-text{
         margin-bottom: 0.5rem;
         font-size: 0.75rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 }
 

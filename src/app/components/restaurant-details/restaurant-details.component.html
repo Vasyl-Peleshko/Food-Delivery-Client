@@ -1,0 +1,112 @@
+<div *ngIf="restaurant$ | async as restaurant; else loading" class="relative flex-col justify-center pt-5 bg-[#2D2D3A]">
+    <div class="flex justify-center items-center">
+        <div class="relative rounded-2xl overflow-hidden w-90 h-50 pr-1">
+            <img src="assets/italiano.jpg" alt="{{ restaurant.name }}" class="w-full h-full object-cover rounded-2xl" />   
+
+            <button class="absolute top-2 left-2 bg-white px-4 py-1 rounded-full shadow-md hover:bg-gray-200 text-xl">
+              &lt;
+            </button>    
+
+            <button class="absolute top-2 right-4 bg-[#FE724C] w-10 h-10 rounded-full shadow-md hover:bg-gray-200 flex items-center justify-center">
+              <span class="text-white text-xl">❤</span>
+            </button>    
+        </div>
+    </div>
+
+    <div class="absolute top-38 left-1/2 transform -translate-x-1/2 bg-white rounded-full p-3 shadow-lg">
+        <img [src]="restaurant.imgUrl" alt="{{ restaurant.name }} logo" class="w-20 h-20 rounded-full object-cover border-2 border-white">
+    </div>  
+
+    <div class="text-white p-6 pb-0 rounded-2xl w-80 mx-auto text-center flex flex-col items-center mt-4">
+        <h2 class="text-xl font-bold mt-3">{{restaurant.name}}</h2>
+        <p class="text-gray-400 text-sm">4102 Pretty View Lanenda</p>
+    
+        <!-- Categories -->
+        <div class="flex justify-center gap-2 mt-3" *ngIf="restaurant?.categories?.length">
+            <span 
+              *ngFor="let category of restaurant.categories" 
+              class="bg-gray-700 px-3 py-1 rounded-full text-xs">
+              {{ category }}
+            </span>
+          </div>          
+    
+        <!-- Delivery and Time -->
+        <div class="flex flex-col items-center mt-4 text-sm space-y-2">
+            <div class="flex items-center gap-1">
+                <span class="text-red-400">🚴‍♂️</span>
+                <span class="text-gray-300">{{restaurant?.delivery?.cost}}</span>
+            </div> 
+            <div class="flex items-center gap-1">
+                <span class="text-red-400">⏳</span>
+                <span class="text-gray-300">{{restaurant?.delivery?.time}} min</span>
+            </div>
+        </div>
+    
+        <!-- Rating -->
+        <div class="flex items-center justify-center gap-2 mt-3">
+            <span class="text-yellow-400 text-lg">⭐</span>
+            <span class="text-white font-bold">{{restaurant?.rating}}</span>
+            <span class="text-gray-300">({{restaurant.feedbacks | reviewFormatter}})</span>
+            <a href="#" class="text-red-400 text-sm font-semibold">See Review</a>
+        </div>
+    </div>
+    
+    <div class="text-white px-4 py-2 flex items-center gap-2 text-lg font-light relative">
+        Featured items
+        <span class="bg-yellow-400 text-gray-900 px-1  rounded-full text-xs font-bold absolute left-33 top-2 transform translate-x-1/2">9</span>
+      </div>       
+
+    <div class="flex overflow-x-auto">
+        <div 
+          *ngFor="let foodItem of foodItems" 
+          class="flex-shrink-0 w-60 p-2"
+        >
+          <fd-primary-card 
+            [itemData]="foodItem"
+            [config]="foodCardConfig"
+          ></fd-primary-card>
+        </div>
+    </div>
+
+    <div class="w-full overflow-x-auto whitespace-nowrap py-4">
+        <div class="flex gap-3 px-4">
+            <button class="px-4 py-2 bg-[#FE724C] text-white rounded-full font-semibold">
+                All
+            </button>
+            <button class="px-4 py-2 border border-gray-500 text-white rounded-full">
+                Legends
+            </button>
+            <button class="px-4 py-2 border border-gray-500 text-white rounded-full">
+                Bundles
+            </button>
+            <button class="px-4 py-2 border border-gray-500 text-white rounded-full">
+                Additions
+            </button>
+            <button class="px-4 py-2 border border-gray-500 text-white rounded-full">
+                Weapons
+            </button>
+            <button class="px-4 py-2 border border-gray-500 text-white rounded-full">
+                Skins
+            </button>
+            <button class="px-4 py-2 border border-gray-500 text-white rounded-full">
+                Events
+            </button>
+        </div>
+    </div>
+
+    <div class="flex overflow-x-auto">
+        <div 
+          *ngFor="let foodItem of foodItems" 
+          class="flex-shrink-0 w-60 p-2"
+        >
+          <fd-primary-card 
+            [itemData]="foodItem"
+            [config]="foodCardConfig"
+          ></fd-primary-card>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <p class="text-center text-gray-500">Loading...</p>
+</ng-template>
