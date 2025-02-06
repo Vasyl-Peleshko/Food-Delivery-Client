@@ -29,7 +29,6 @@ export class HomePageComponent implements OnInit {
   }
   
   navigateToRestaurant(id: string): void {
-    console.log(`/${RoutingConstants.RESTAURANTS}/${id}`);
     this.router.navigate([`/${RoutingConstants.RESTAURANTS}/${id}`]);
   }
 
