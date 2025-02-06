@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
+import { emailValidator, nameValidator, passwordValidator } from '../../shared/validators/validator';
 
 @Component({
   selector: 'fd-signup',
@@ -17,16 +18,9 @@ export class SignupComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email, Validators.pattern(/.+@.+\..+/)]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/)
-        ]
-      ]
+      name: ['', [Validators.required, nameValidator]],
+      email: ['', [Validators.required, emailValidator]],
+      password: ['', [Validators.required, passwordValidator]]
     });
   }
 

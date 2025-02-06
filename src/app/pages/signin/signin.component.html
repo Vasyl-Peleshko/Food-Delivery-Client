@@ -9,9 +9,19 @@
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium">E-mail</label>
             <input type="email" id="email" formControlName="email" class="w-full px-3 py-5 mt-1 border rounded-lg bg-[#393948] border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500" />
-            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-400 text-xs mt-1">
-                Invalid email format
+
+            <div *ngIf="loginForm.get('email')?.touched">
+                <div *ngIf="loginForm.get('email')?.errors?.['required']" class="text-red-400 text-xs mt-1">
+                  Email is required.
+                </div>
+              
+                <div *ngIf="loginForm.get('email')?.errors && !loginForm.get('email')?.errors?.['required']">
+                  <div *ngIf="loginForm.get('email')?.errors?.['emailInvalid']" class="text-red-400 text-xs mt-1">
+                    Email must be in the correct format (e.g., user&#64;example.com).
+                  </div>
+                </div>
             </div>
+                       
         </div>
 
         <div class="mb-4">
@@ -26,9 +36,24 @@
                 <span></span> 
                 <a href="#" class="text-gray-400 hover:underline">Forgot password?</a>
             </div>
-            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-400 text-xs mt-1">
-                Password must be at least 6 characters, contain 1 uppercase letter and 1 special character
-            </div>
+            <div *ngIf="loginForm.get('password')?.touched">
+
+                <div *ngIf="loginForm.get('password')?.errors?.['required']" class="text-red-400 text-xs mt-0">
+                  Password is required.
+                </div>
+              
+                <div *ngIf="loginForm.get('password')?.errors && !loginForm.get('password')?.errors?.['required']">
+                  <div *ngIf="loginForm.get('password')?.errors?.['minLength']" class="text-red-400 text-xs mt-1">
+                    Password must be at least 6 characters long.
+                  </div>
+                  <div *ngIf="loginForm.get('password')?.errors?.['uppercaseRequired']" class="text-red-400 text-xs mt-1">
+                    Password must contain at least one uppercase letter.
+                  </div>
+                  <div *ngIf="loginForm.get('password')?.errors?.['specialCharRequired']" class="text-red-400 text-xs mt-1">
+                    Password must contain at least one special character (!&#64;#$%^&*).
+                  </div>
+                </div>
+            </div>    
         </div>
 
         <div class="flex justify-center items-center h-25">

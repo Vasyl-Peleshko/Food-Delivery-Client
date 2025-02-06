@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ItemCardInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { RestaurantService } from '../../shared/services/restaurant.service';
-import { CardConfigInterface, PrimaryCardComponent } from '../primary-card/primary-card.component';
+import { CardConfigInterface, PrimaryCardComponent } from '../../components/primary-card/primary-card.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RoutingConstants } from '../../shared/constants/routing-constants';

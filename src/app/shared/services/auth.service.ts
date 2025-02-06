@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { RoutingConstants } from '../constants/routing-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/auth`; 
+  private apiUrl = `${environment.apiUrl}/${RoutingConstants.AUTH}`; 
 
   constructor(private http: HttpClient) {}
 

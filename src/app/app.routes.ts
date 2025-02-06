@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './components/home-page/home-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RoutingConstants } from './shared/constants/routing-constants';
-import { SignupComponent } from './components/signup/signup.component';
-import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SigninComponent } from './pages/signin/signin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: RoutingConstants.HOME, pathMatch: 'full' }, 
