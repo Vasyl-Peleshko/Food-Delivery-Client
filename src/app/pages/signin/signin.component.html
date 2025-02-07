@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="bg-[#2D2D3A] p-6 pt-0 w-full h-screen flex flex-col justify-center items-center text-white overflow-hidden">
+<form [formGroup]="loginForm" class="bg-[#2D2D3A] p-6 pt-0 w-full h-screen flex flex-col justify-center items-center text-white overflow-hidden">
 
     <div class="absolute top-0 left-0 w-40 h-40 bg-[#FF6D4D] rounded-full -translate-x-1/2 -translate-y-1/2"></div>
     <div class="absolute top-0 right-0 w-24 h-24 bg-[#FFECE5] rounded-full -translate-y-1/2"></div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="flex justify-center items-center h-25">
-            <button type="submit" [disabled]="loginForm.invalid" class="w-60 bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-2xl font-semibold disabled:opacity-70">
+            <button type="submit" [disabled]="loginForm.invalid" (click)="onEmailPasswordLogin()" class="w-60 bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-2xl font-semibold disabled:opacity-70">
                 Login
             </button>
         </div>
@@ -78,15 +78,29 @@
                 <hr class="w-1/4 border-gray-600">
             </div>
             <div class="flex justify-center mt-4 space-x-4">
-                <button class="flex items-center px-6 py-4 bg-white text-black rounded-full shadow-md w-60 justify-center">
+                <button class="flex items-center px-6 py-4 bg-white text-black rounded-full shadow-md w-60 mb-4 justify-center">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="w-8 h-8 mr-2" />
                     FACEBOOK
-                </button>
-                <button class="flex items-center px-6 py-4 bg-white text-black rounded-full shadow-md w-60 justify-center">
-                    <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/google-color.png" alt="Google" class="w-8 h-8 mr-2" />
-                    GOOGLE
                 </button>
             </div>
         </div>     
     </div>
+
+    <div
+        id="g_id_onload"
+        data-client_id="557332738492-v78eq3epkk9fcnl9asl0gicsd9mq374p.apps.googleusercontent.com"
+        data-context="use"
+        data-ux_mode="popup"
+        data-itp_support="true"
+        data-callback="handleOauthResponse"
+    ></div>
+    <div
+        class="g_id_signin"
+        data-type="standard"
+        data-shape="pill"
+        data-theme="filled_blue"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left"
+    ></div>
 </form>

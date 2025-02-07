@@ -5,10 +5,11 @@ import { AuthService } from '../../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
 import { emailValidator, passwordValidator } from '../../shared/validators/validator';
+import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'fd-signin',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, GoogleSigninButtonModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
@@ -16,14 +17,14 @@ export class SigninComponent {
   loginForm: FormGroup;
   errorMessage?: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private googleService: SocialAuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, emailValidator]],
       password: ['', [Validators.required, passwordValidator]],
     });
   }
-
-  onSubmit() {    
+  
+  onEmailPasswordLogin() {    
     if (this.loginForm.invalid) return;
 
     this.authService.login(this.loginForm.value).subscribe({
