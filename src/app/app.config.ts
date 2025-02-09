@@ -3,10 +3,9 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
   GoogleLoginProvider,
-  FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
 
 export const appConfig: ApplicationConfig = {
@@ -30,26 +29,15 @@ export const appConfig: ApplicationConfig = {
               }
             ),
           },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('526244792835323')
+          },
         ],
         onError: (error) => {
           console.error(error);
         },
       } as SocialAuthServiceConfig,
-    },
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('526244792835323')
-          }
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    }
+    }, 
   ],  
 };
