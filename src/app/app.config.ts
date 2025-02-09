@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
   GoogleLoginProvider,
+  FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
 
 export const appConfig: ApplicationConfig = {
@@ -33,6 +34,21 @@ export const appConfig: ApplicationConfig = {
         onError: (error) => {
           console.error(error);
         },
+      } as SocialAuthServiceConfig,
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('526244792835323')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
       } as SocialAuthServiceConfig,
     }
   ],  
