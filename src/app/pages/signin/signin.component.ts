@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
 import { emailValidator, passwordValidator } from '../../shared/validators/validator';
 import { SocialAuthService, GoogleSigninButtonModule, FacebookLoginProvider } from '@abacritt/angularx-social-login';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'fd-signin',
@@ -16,6 +17,7 @@ import { SocialAuthService, GoogleSigninButtonModule, FacebookLoginProvider } fr
 export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage?: string = '';
+  environment = environment;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private facebookService: SocialAuthService) {
     this.loginForm = this.fb.group({

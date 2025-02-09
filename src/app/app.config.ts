@@ -7,6 +7,7 @@ import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angula
 import {
   GoogleLoginProvider,
 } from '@abacritt/angularx-social-login';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   
@@ -22,7 +23,7 @@ export const appConfig: ApplicationConfig = {
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(`557332738492-v78eq3epkk9fcnl9asl0gicsd9mq374p.apps.googleusercontent.com`,
+            provider: new GoogleLoginProvider(environment.clientId,
               {
                 oneTapEnabled: false,  
                 prompt: "select_account", 
@@ -31,7 +32,7 @@ export const appConfig: ApplicationConfig = {
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('526244792835323')
+            provider: new FacebookLoginProvider(environment.facebookId)
           },
         ],
         onError: (error) => {
