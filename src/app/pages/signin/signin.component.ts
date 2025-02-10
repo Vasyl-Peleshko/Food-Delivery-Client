@@ -7,6 +7,7 @@ import { RoutingConstants } from '../../shared/constants/routing-constants';
 import { emailValidator, passwordValidator } from '../../shared/validators/validator';
 import { SocialAuthService, GoogleSigninButtonModule, FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { environment } from '../../../environments/environment';
+import { handleOauthResponse, OAuthResponse } from '../../shared/utils/auth-helpers';
 
 @Component({
   selector: 'fd-signin',
@@ -30,6 +31,7 @@ export class SigninComponent implements OnInit {
     this.facebookService.authState.subscribe((user) => {
       console.log(user);
     });
+    (window as unknown as { handleOauthResponse: (response: OAuthResponse) => void }).handleOauthResponse = handleOauthResponse;
   }
 
   signInWithFB(): void {
