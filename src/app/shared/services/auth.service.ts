@@ -32,7 +32,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  private saveToken(token: string) {
+  saveToken(token: string) {
     localStorage.setItem('token', token);
   }
 }
