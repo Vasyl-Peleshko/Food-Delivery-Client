@@ -9,6 +9,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { environment } from '../environments/environment';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { ServerResponseInterceptor } from './shared/interceptors/server-response.interceptor';
 
 export const appConfig: ApplicationConfig = {
   
@@ -46,6 +47,7 @@ export const appConfig: ApplicationConfig = {
         withInterceptorsFromDi(),
       ),
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    ]
+      {provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true},
+    ],
   ],  
 };
