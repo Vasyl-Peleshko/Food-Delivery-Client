@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PrimaryCardComponent } from './components/primary-card/primary-card.component';
@@ -22,8 +22,6 @@ export class AppComponent implements OnInit{
 
   constructor(
     private _loading: LoadingService,
-    private cdr: ChangeDetectorRef
-
   ){ }
 
   ngOnInit() {
@@ -32,10 +30,9 @@ export class AppComponent implements OnInit{
 
   listenToLoading(): void {
     this._loading.loadingSub
-      .pipe(delay(0)) 
+      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe((loading) => {
         this.loading = loading;
-        this.cdr.detectChanges(); // Форсуємо оновлення UI
       });
   }
 }
