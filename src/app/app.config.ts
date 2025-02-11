@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
@@ -8,6 +8,7 @@ import {
   GoogleLoginProvider,
 } from '@abacritt/angularx-social-login';
 import { environment } from '../environments/environment';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   
@@ -40,5 +41,11 @@ export const appConfig: ApplicationConfig = {
         },
       } as SocialAuthServiceConfig,
     }, 
+    [
+      provideHttpClient(
+        withInterceptorsFromDi(),
+      ),
+      {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    ]
   ],  
 };
