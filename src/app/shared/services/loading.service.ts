@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ export class LoadingService {
   loadingSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loadingMap: Map<string, boolean> = new Map<string, boolean>();
 
-  constructor() {}
+  constructor(
+    private snackBar: MatSnackBar,
+  ) {}
 
   /**
    * Sets the loadingSub property value based on the following:
@@ -35,5 +38,12 @@ export class LoadingService {
     if (this.loadingMap.size === 0) {
       this.loadingSub.next(false);
     }
+  }
+
+  showError(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      panelClass: ['errorSnack']
+    });
   }
 }

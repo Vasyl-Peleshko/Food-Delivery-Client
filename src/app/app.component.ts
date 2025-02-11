@@ -8,12 +8,13 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './pages/signup/signup.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoadingService } from './shared/services/loading.service';
 import { delay } from 'rxjs';
 
 @Component({
   selector: 'fd-root',
-  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent, MatProgressBarModule],
+  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent, MatProgressBarModule, MatSnackBarModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit{
   loading?: boolean = false;
 
   constructor(
-    private _loading: LoadingService,
+    private _loadingService: LoadingService,
   ){ }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit{
   }
 
   listenToLoading(): void {
-    this._loading.loadingSub
+    this._loadingService.loadingSub
       .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe((loading) => {
         this.loading = loading;
