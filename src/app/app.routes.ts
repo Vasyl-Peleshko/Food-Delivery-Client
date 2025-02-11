@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './components/home-page/home-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RoutingConstants } from './shared/constants/routing-constants';
-import { SignupComponent } from './components/signup/signup.component';
-import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: RoutingConstants.HOME, pathMatch: 'full' }, 
-  { path: RoutingConstants.HOME, component: HomePageComponent },
+  { path: RoutingConstants.HOME, component: HomePageComponent, canActivate: [AuthGuard] },
   { path: RoutingConstants.SIGNUP, component: SignupComponent },
   { path: RoutingConstants.LOGIN, component: SigninComponent },
   { 

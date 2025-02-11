@@ -4,35 +4,30 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
+import { emailValidator, nameValidator, passwordValidator } from '../../shared/validators/validator';
 
 @Component({
-  selector: 'fd-signin',
+  selector: 'fd-signup',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class SigninComponent {
-  loginForm: FormGroup;
+export class SignupComponent {
+  registerForm: FormGroup;
   errorMessage?: string = '';
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern(/.+@.+\..+/)]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/)
-        ]
-      ]
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, nameValidator]],
+      email: ['', [Validators.required, emailValidator]],
+      password: ['', [Validators.required, passwordValidator]]
     });
   }
 
   onSubmit() {    
-    if (this.loginForm.invalid) return;
+    if (this.registerForm.invalid) return;
 
-    this.authService.login(this.loginForm.value).subscribe({
+    this.authService.register(this.registerForm.value).subscribe({
       next: () => {
         this.router.navigate([`${RoutingConstants.HOME}`]); 
       },
