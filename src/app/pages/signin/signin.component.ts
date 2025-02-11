@@ -55,14 +55,14 @@ export class SigninComponent implements OnDestroy  {
 
   onEmailPasswordLogin() {    
     if (this.loginForm.invalid) return;
-
+    
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
         this.router.navigate([`${RoutingConstants.HOME}`]); 
       },
       error: (err) => {
-        this.errorMessage = err.error.message || 'Registration failed';
-      }
+        this.errorMessage = err.error.message || 'Login failed';
+      },
     });
   }
 }
