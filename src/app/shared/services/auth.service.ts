@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import {  Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { RoutingConstants } from '../constants/routing-constants';
 
@@ -20,7 +20,7 @@ export class AuthService {
 
   login(userData: { email: string; password: string }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, userData).pipe(
-      tap(response => this.saveToken(response.token))
+      tap(response => this.saveToken(response.token)),
     );
   }
 
