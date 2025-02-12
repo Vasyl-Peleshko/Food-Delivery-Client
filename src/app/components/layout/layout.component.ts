@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface RouteConfigData {
   displayHeader?: boolean;
@@ -19,53 +20,53 @@ interface RouteConfigData {
   imports: [CommonModule, RouterOutlet],
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, OnDestroy {
-  showHeader = true;
-  showFooter = true;
-  isHeaderTransparent = false;
-  headerTitle = '';
-  showBackButton = false;
-  showHeaderIcon = false;
-  showTitle = false;
-  routeSub!: Subscription;
+export class LayoutComponent implements OnInit {
+  private _destroyRef = inject(DestroyRef); 
+
+  layoutConfig: RouteConfigData = {
+    displayHeader: true,
+    displayFooter: true,
+    isHeaderTransparent: false,
+    headerTitle: '',
+    displayBackButton: false,
+    displayHeaderIcon: false,
+    displayTitle: false
+  };
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {  
     this.updateLayout();
-  
-    this.routeSub = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntilDestroyed(this._destroyRef) 
     ).subscribe(() => {
       this.updateLayout();
     });
   }
-  
+
   private updateLayout(): void {
     let activeRoute = this.activatedRoute;
-  
+
     while (activeRoute.firstChild) {
       activeRoute = activeRoute.firstChild;
     }
-  
+
     const routeData = activeRoute.snapshot.data as RouteConfigData;
-  
-    this.showHeader = routeData?.displayHeader ?? true;
-    this.showFooter = routeData?.displayFooter ?? true;
-    this.isHeaderTransparent = routeData?.isHeaderTransparent ?? false;
-    this.headerTitle = routeData?.headerTitle ?? '';
-    this.showBackButton = routeData?.displayBackButton ?? false;
-    this.showHeaderIcon = routeData?.displayHeaderIcon ?? true;
-    this.showTitle = routeData?.displayTitle ?? true;
-  }
-  
-  goBack(): void {
-    this.router.navigate(['..']);
+
+    this.layoutConfig = {
+      displayHeader: routeData.displayHeader ?? true,
+      displayFooter: routeData.displayFooter ?? true,
+      isHeaderTransparent: routeData.isHeaderTransparent ?? false,
+      headerTitle: routeData.headerTitle ?? '',
+      displayBackButton: routeData.displayBackButton ?? false,
+      displayHeaderIcon: routeData.displayHeaderIcon ?? true,
+      displayTitle: routeData.displayTitle ?? true
+    };
   }
 
-  ngOnDestroy(): void {
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
-    }
+  goBack(): void {
+    this.router.navigate(['..']);
   }
 }

@@ -1,51 +1,49 @@
-<div class="layout">
-    <header *ngIf="showHeader" [ngClass]="{ 'transparent-header': isHeaderTransparent }"
-        class="flex items-center justify-between p-4 bg-[#2D2D3A] shadow-md border-0">
+<header *ngIf="layoutConfig.displayHeader" 
+        [ngClass]="{ 'transparent-header': layoutConfig.isHeaderTransparent }"
+        class="flex items-center justify-between p-4 bg-[#2D2D3A] shadow-md">
 
-    <button *ngIf="showBackButton" class="text-white p-2" (click)="goBack()">
+    <button *ngIf="layoutConfig.displayBackButton" class="text-white p-2" (click)="goBack()">
         <img src="assets/back-icon.png" alt="Back" class="w-6 h-6">
     </button>
 
-    <div *ngIf="showTitle" class="flex-1 flex flex-col items-center text-center">
+    <div *ngIf="layoutConfig.displayTitle" class="flex-1 flex flex-col items-center text-center">
         <span class="text-gray-300 font-semibold flex items-center">
             Deliver to <span class="ml-1">▼</span>
         </span>
-        <span class="text-red-500 font-semibold">{{headerTitle}}</span>
+        <span class="text-red-500 font-semibold">{{ layoutConfig.headerTitle }}</span>
     </div>
 
-    <img *ngIf="showHeaderIcon"
+    <img *ngIf="layoutConfig.displayHeaderIcon"
          src="https://i.pinimg.com/736x/d4/37/1b/d4371b803c58abae4e6b873d2c9bac74.jpg"
          alt="User Avatar"
-         class="w-10 h-10 rounded-full border border-transparent ml-auto" 
-    />
+         class="w-10 h-10 rounded-full border border-transparent ml-auto" />
 </header>
 
-    <main class="page-content">
-      <router-outlet></router-outlet>
-    </main>
-  
-    <footer *ngIf="showFooter"
-            class="fixed bottom-0 left-0 w-full bg-[#474755] p-4 flex justify-around items-center shadow-md">
-        <div class="flex flex-col items-center text-gray-400">
-            <img src="assets/compass-icon.png" alt="Explore" class="w-6 h-6">
-        </div>
-  
-        <div class="flex flex-col items-center text-gray-400">
-            <img src="assets/location-icon.png" alt="Location" class="w-6 h-6">
-        </div>
-    
-        <div class="flex flex-col items-center text-gray-400 relative">
-            <img src="assets/bag-icon.png" alt="Cart" class="w-6 h-6">
-            <span class="notification-badge">4</span>
-        </div>
-    
-        <div class="flex flex-col items-center text-gray-400">
-            <img src="assets/love-icon.png" alt="Favorites" class="w-6 h-6 opacity-50">
-        </div>
-    
-        <div class="flex flex-col items-center text-gray-400 relative">
-            <img src="assets/bell-icon.png" alt="Notifications" class="w-6 h-6">
-            <span class="notification-badge">6</span>
-        </div>
-    </footer>
-</div>
+<main class="page-content">
+    <router-outlet></router-outlet>
+</main>
+
+<footer *ngIf="layoutConfig.displayFooter" 
+        class="fixed bottom-0 left-0 w-full bg-[#474755] p-4 flex justify-around items-center shadow-md">
+    <div class="flex flex-col items-center text-gray-400">
+        <img src="assets/compass-icon.png" alt="Explore" class="w-6 h-6">
+    </div>
+
+    <div class="flex flex-col items-center text-gray-400">
+        <img src="assets/location-icon.png" alt="Location" class="w-6 h-6">
+    </div>
+
+    <div class="flex flex-col items-center text-gray-400 relative">
+        <img src="assets/bag-icon.png" alt="Cart" class="w-6 h-6">
+        <span class="notification-badge">4</span>
+    </div>
+
+    <div class="flex flex-col items-center text-gray-400">
+        <img src="assets/love-icon.png" alt="Favorites" class="w-6 h-6 opacity-50">
+    </div>
+
+    <div class="flex flex-col items-center text-gray-400 relative">
+        <img src="assets/bell-icon.png" alt="Notifications" class="w-6 h-6">
+        <span class="notification-badge">6</span>
+    </div>
+</footer>
