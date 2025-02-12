@@ -16,6 +16,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class HomePageComponent implements OnInit {
  restaurants$!: Observable<ItemCardInterface[]>;
+ isSidebarOpen = false;
 
   constructor(
     private readonly restaurantsService: RestaurantService,
@@ -40,6 +41,10 @@ export class HomePageComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate([`${RoutingConstants.LOGIN}`]); 
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   restaurantCardConfig : CardConfigInterface = {
