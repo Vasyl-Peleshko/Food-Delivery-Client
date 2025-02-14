@@ -1,0 +1,85 @@
+<div *ngIf="foodItem$ | async as foodItem; else loading" class="flex flex-col justify-center pt-5 bg-[#2D2D3A] min-h-screen">
+  <div class="flex justify-center items-center">
+      <div class="relative rounded-2xl overflow-hidden w-90 h-65 pr-1">
+          <img [src]="foodItem.imgUrl" alt="{{ foodItem.name }}" class="w-full h-full object-cover rounded-2xl" />   
+
+          <button class="absolute top-2 right-4 bg-[#FE724C] w-10 h-10 rounded-full shadow-md hover:bg-gray-200 flex items-center justify-center">
+            <span class="text-white text-xl">❤️</span>
+          </button>      
+        </div>
+  </div>
+
+  <div class="text-white p-4 rounded-md w-90 ml-2">
+      <h2 class="text-3xl font-bold">{{foodItem.name}}</h2>
+    
+      <div class="flex items-center mt-2">
+        <span class="text-yellow-400 text-lg">⭐️</span>
+        <span class="text-white font-semibold ml-1">{{foodItem.rating}}</span>
+        <span class="text-gray-400 text-sm ml-1">({{foodItem.feedbacks | reviewFormatter}})</span>
+        <a href="#" class="text-red-400 text-sm ml-2 underline">See Review</a>
+      </div>
+    
+      <div class="flex items-center justify-between mt-2">
+        <p class="text-2xl font-bold">$9.50</p>
+    
+        <div class="flex items-center space-x-4">
+          <button 
+            (click)="decreaseQuantity()"
+            class="w-8 h-8 flex items-center justify-center border border-white text-white rounded-full"
+            >
+            −
+          </button>
+          <span class="text-white text-lg font-semibold">{{ quantity | number: '2.0-0' }}</span>
+          <button 
+            (click)="increaseQuantity()"
+            class="w-8 h-8 flex items-center justify-center bg-white text-orange-500 rounded-full">
+            +
+          </button>
+        </div>
+      </div>
+
+      <p [class.line-clamp-3]="!isExpanded" class="text-gray-400 text-sm mt-2">
+        {{ foodItem.description }}
+      </p>
+      <button (click)="toggleText()" class="text-blue-400 text-sm mt-1">
+        {{ isExpanded ? '⏶' : '...' }}
+      </button>
+      
+  </div>
+    
+    <div *ngIf="foodItem.addons && foodItem.addons.length > 0" class="text-white p-4 rounded-lg w-90 ml-2">
+        <h2 class="text-lg font-bold mb-4">Choice of Add On</h2>
+    
+        <div *ngFor="let addon of foodItem.addons" class="flex items-center justify-between mb-3">
+            <div class="flex items-center">
+                <img src="assets/pepper.jpg" [alt]="addon.name" class="w-10 h-10 rounded-full">
+                <span class="ml-3">{{ addon.name }}</span>
+            </div>
+        
+            <div class="flex items-center gap-4">
+                <span class="font-semibold text-white">+${{ addon.price.toFixed(2) }}</span>
+                
+                <button 
+                  (click)="selectAddon(addon.name)"
+                  class="w-6 h-6 flex items-center justify-center rounded-full border-2 ml-auto"
+                  [ngClass]="{'border-orange-400': selectedAddon === addon.name, 'border-gray-400': selectedAddon !== addon.name}">
+                  <div *ngIf="selectedAddon === addon.name" class="w-3 h-3 bg-orange-400 rounded-full"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  <div class="flex justify-center items-center p-10 rounded-lg">
+      <button class="bg-[#FE724C] text-white font-semibold flex items-center px-6 py-3 rounded-full shadow-[0px_4px_15px_rgba(254,114,76,0.5)] 
+                    hover:bg-[#fd5c34] transition-all">
+          <span class="bg-white bg-opacity-20 p-2 rounded-full mr-4 flex items-center justify-center">
+              <img src="/assets/bag-icon-button.png" alt="Lock" class="w-5 h-5 filter-orange">
+          </span>
+          ADD TO CART
+      </button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="text-center text-gray-500">Loading...</p>
+</ng-template>

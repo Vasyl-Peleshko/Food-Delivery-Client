@@ -4,4 +4,5 @@ export const RoutingConstants = {
     LOGIN: 'signin',
     AUTH: 'auth',
     RESTAURANTS: 'restaurants',
+    FOODITEMS: 'food-items'
 };
