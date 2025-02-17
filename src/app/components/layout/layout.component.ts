@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef, DoCheck } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RoutingConstants } from '../../shared/constants/routing-constants';
+import { CartService } from '../../shared/services/cart.service';
 
 interface RouteConfigData {
   displayHeader?: boolean;
@@ -20,8 +22,9 @@ interface RouteConfigData {
   imports: [CommonModule, RouterOutlet],
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, DoCheck {
   private _destroyRef = inject(DestroyRef); 
+  cartItemCount?: number = 0;
 
   layoutConfig: RouteConfigData = {
     displayHeader: true,
@@ -33,7 +36,11 @@ export class LayoutComponent implements OnInit {
     displayTitle: false
   };
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private cartServicee: CartService,
+  ) {}
 
   ngOnInit(): void {  
     this.updateLayout();
@@ -44,6 +51,19 @@ export class LayoutComponent implements OnInit {
     ).subscribe(() => {
       this.updateLayout();
     });
+  }
+  
+  ngDoCheck() {
+    this.getCartItemCount();
+  }
+
+  getCartItemCount() {
+    const cartItems = this.cartServicee.getCart();
+    this.cartItemCount = cartItems.length;
+  }
+
+  navigateToCart() {
+    this.router.navigate([`${RoutingConstants.CART}`]); 
   }
 
   private updateLayout(): void {

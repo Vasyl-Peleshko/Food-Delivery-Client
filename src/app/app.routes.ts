@@ -5,6 +5,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RoutingConstants } from './shared/constants/routing-constants';
+import { CartItemsComponent } from './pages/cart-items/cart-items.component';
 
 export const routes: Routes = [
   {
@@ -39,7 +40,20 @@ export const routes: Routes = [
         path: RoutingConstants.FOODITEMS,
         loadChildren: () => import('./pages/food-details/food-details.route')
           .then(m => m.foodDetailsRoutes),
-      }
+      },
+      {
+        path: RoutingConstants.CART,
+        component: CartItemsComponent,
+        data: {
+          displayHeader: false,
+          displayBackButton: false,
+          displayFooter: true,
+          displayTitle: false,
+          isHeaderTransparent: false,
+          headerTitle: 'Search Food',
+          displayHeaderIcon: true
+        }
+      },
     ]
   },
   {

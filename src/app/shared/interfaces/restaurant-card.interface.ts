@@ -34,3 +34,13 @@ export interface FoodItemInterface {
       countable: boolean;
     }[];
 }
+
+export interface CartItemInterface {
+    id: string;
+    name: string;
+    imgUrl: string;
+    price: number;
+    quantity: number;
+    addon?: string | null;
+    addons?: { name: string; price: number }[]; 
+}
