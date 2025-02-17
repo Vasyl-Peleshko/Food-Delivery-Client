@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ReviewFormatterPipe } from '../../shared/pipes/review-formatter.pipe';
-import { CardConfigInterface, PrimaryCardComponent } from '../primary-card/primary-card.component';
+import { CardConfigInterface, PrimaryCardComponent } from '../../components/primary-card/primary-card.component';
 import { FoodItemService } from '../../shared/services/food-item.service';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
 

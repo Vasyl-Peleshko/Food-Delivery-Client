@@ -32,12 +32,12 @@ export const routes: Routes = [
       },
       {
         path: RoutingConstants.RESTAURANTS,
-        loadChildren: () => import('./components/restaurant-details/restaurant.routes')
+        loadChildren: () => import('./pages/restaurant-details/restaurant.routes')
           .then(m => m.restaurantRoutes),
       },
       {
         path: RoutingConstants.FOODITEMS,
-        loadChildren: () => import('./components/food-details/food-details.route')
+        loadChildren: () => import('./pages/food-details/food-details.route')
           .then(m => m.foodDetailsRoutes),
       }
     ]
