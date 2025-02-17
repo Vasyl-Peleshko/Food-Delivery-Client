@@ -33,9 +33,14 @@
         <img src="assets/location-icon.png" alt="Location" class="w-6 h-6">
     </div>
 
-    <div class="flex flex-col items-center text-gray-400 relative">
+    <div 
+        class="flex flex-col items-center text-gray-400 relative" role="button"
+        tabindex="0"
+        (click)="navigateToCart()"
+        (keydown.enter)="navigateToCart()"
+        (keydown.space)="navigateToCart()">
         <img src="assets/bag-icon.png" alt="Cart" class="w-6 h-6">
-        <span class="notification-badge">4</span>
+        <span class="notification-badge">{{ cartItemCount }}</span>
     </div>
 
     <div class="flex flex-col items-center text-gray-400">
