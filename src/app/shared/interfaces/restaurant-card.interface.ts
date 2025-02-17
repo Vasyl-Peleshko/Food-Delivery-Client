@@ -17,3 +17,20 @@ export interface ItemCardInterface extends BaseCardInterface {
     price?: number;
     description?: string;
 }
+
+export interface FoodItemInterface {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    rating: number;
+    feedbacks: number;
+    restaurantId: string;
+    imgUrl: string;
+    ingredients?: string[];
+    addons?: {
+      name: string;
+      price: number;
+      countable: boolean;
+    }[];
+}

@@ -58,8 +58,12 @@
 
     <div class="flex overflow-x-auto">
         <div 
-          *ngFor="let foodItem of foodItems" 
+          *ngFor="let foodItem of foodItems$ | async" 
           class="flex-shrink-0 w-60 p-2"
+          (click)="navigateToFoodItem(foodItem.id)"
+          (keydown.enter)="navigateToFoodItem(foodItem.id)"
+          (keydown.space)="navigateToFoodItem(foodItem.id)"
+          tabindex="0"
         >
           <fd-primary-card 
             [itemData]="foodItem"
@@ -96,8 +100,12 @@
 
     <div class="flex overflow-x-auto">
         <div 
-          *ngFor="let foodItem of foodItems" 
+          *ngFor="let foodItem of foodItems$ | async" 
           class="flex-shrink-0 w-60 p-2"
+          (click)="navigateToFoodItem(foodItem.id)"
+          (keydown.enter)="navigateToFoodItem(foodItem.id)"
+          (keydown.space)="navigateToFoodItem(foodItem.id)"
+          tabindex="0"
         >
           <fd-primary-card 
             [itemData]="foodItem"

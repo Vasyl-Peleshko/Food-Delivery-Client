@@ -34,14 +34,11 @@ export const routes: Routes = [
         path: RoutingConstants.RESTAURANTS,
         loadChildren: () => import('./components/restaurant-details/restaurant.routes')
           .then(m => m.restaurantRoutes),
-          data: {
-            displayHeader: false,
-            displayBackButton: false,
-            displayFooter: true,
-            isHeaderTransparent: false,
-            headerTitle: 'Search Food',
-            displayHeaderIcon: false
-          }
+      },
+      {
+        path: RoutingConstants.FOODITEMS,
+        loadChildren: () => import('./components/food-details/food-details.route')
+          .then(m => m.foodDetailsRoutes),
       }
     ]
   },
