@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { FoodItemInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { ActivatedRoute } from '@angular/router';
-import { CardConfigInterface } from '../primary-card/primary-card.component';
+import { CardConfigInterface } from '../../components/primary-card/primary-card.component';
 import { CommonModule } from '@angular/common';
 import { ReviewFormatterPipe } from '../../shared/pipes/review-formatter.pipe';
 
@@ -13,25 +12,21 @@ import { ReviewFormatterPipe } from '../../shared/pipes/review-formatter.pipe';
   styleUrl: './food-details.component.scss'
 })
 export class FoodDetailsComponent implements OnInit {
-  foodItem$!: Observable<FoodItemInterface>;
   isExpanded = false;
   selectedAddon?: string = '';
-  quantity = 2; 
+  quantity = 0; 
+  foodItem!: FoodItemInterface
 
   constructor(
     private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.foodItem$ = this.route.data.pipe(map(data => data['foodItem']))
+    this.foodItem = this.route.snapshot.data['foodItem'];
   }
 
   toggleText() {
     this.isExpanded = !this.isExpanded;
-  }
-
-  selectAddon(addonName: string) {
-    this.selectedAddon = addonName;
   }
 
   increaseQuantity() {

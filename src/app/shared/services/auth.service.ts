@@ -33,8 +33,6 @@ export class AuthService {
   }
 
   saveToken(token: string) {
-    console.log(token);
-    
     localStorage.setItem('token', token);
   }
 }
