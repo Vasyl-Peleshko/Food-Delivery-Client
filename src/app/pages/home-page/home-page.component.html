@@ -82,8 +82,10 @@
             alt="User Avatar"
             class="w-20 h-20 rounded-full border-0 mb-2"
         />
-        <span class="text-lg font-semibold">Eljad Eendaz</span>
-        <span class="text-sm text-gray-400">prelookstudiogmail.com</span>
+        <div *ngIf="user; else loading" class="flex flex-col">
+            <span class="text-lg font-semibold">{{ user.name }}</span>
+            <span class="text-sm text-gray-400">{{ user.email }}</span>
+        </div>
     </div>
 
     <nav class="mt-6">
@@ -119,3 +121,7 @@
         Log Out
     </button>
 </div>
+
+<ng-template #loading>
+    <span class="text-sm text-gray-400">Loading...</span>
+</ng-template>
