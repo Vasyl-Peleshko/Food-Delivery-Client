@@ -5,7 +5,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RoutingConstants } from './shared/constants/routing-constants';
-import { CartItemsComponent } from './pages/cart-items/cart-items.component';
+import { shoppingCartsComponent } from './pages/shopping-carts/shopping-carts.component';
 
 export const routes: Routes = [
   {
@@ -43,7 +43,7 @@ export const routes: Routes = [
       },
       {
         path: RoutingConstants.CART,
-        component: CartItemsComponent,
+        component: shoppingCartsComponent,
         data: {
           displayHeader: false,
           displayBackButton: false,

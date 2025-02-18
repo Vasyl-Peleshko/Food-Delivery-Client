@@ -27,9 +27,7 @@ export class FoodDetailsComponent implements OnInit {
     this.foodItem = this.route.snapshot.data['foodItem'];
   }
 
-  addToCart() {
-    console.log(1);
-    
+  addToCart() {    
     this.cartService.addToCart(this.foodItem, this.quantity, this.selectedAddon);
   }
 

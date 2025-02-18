@@ -6,7 +6,7 @@ import { CardConfigInterface, PrimaryCardComponent } from '../../components/prim
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService, User } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'fd-home-page',
@@ -17,6 +17,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class HomePageComponent implements OnInit {
  restaurants$!: Observable<ItemCardInterface[]>;
  isSidebarOpen = false;
+ user: User | null = null; 
 
   constructor(
     private readonly restaurantsService: RestaurantService,
@@ -27,6 +28,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.restaurants$ = this.restaurantsService.getCachedRestaurants();
     this.restaurantsService.getRestaurants().subscribe();
+    this.loadUser();
   }
 
   addToFavorites(restaurant: ItemCardInterface): void {
@@ -36,6 +38,13 @@ export class HomePageComponent implements OnInit {
   
   navigateToRestaurant(id: string): void {
     this.router.navigate([`/${RoutingConstants.RESTAURANTS}/${id}`]);
+  }
+
+  loadUser() {
+    this.authService.getUser().subscribe({
+      next: (userData) => this.user = userData, 
+      error: (err) => console.error('Error fetching user:', err)
+    });
   }
 
   logout() {
