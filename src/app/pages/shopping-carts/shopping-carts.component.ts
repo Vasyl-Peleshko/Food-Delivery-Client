@@ -5,18 +5,18 @@ import { CommonModule } from '@angular/common';
 import { CartItemComponent } from '../../shared/cart-item/cart-item.component';
 
 @Component({
-  selector: 'fd-cart-items',
+  selector: 'fd-shopping-carts',
   imports: [CommonModule, CartItemComponent],
-  templateUrl: './cart-items.component.html',
-  styleUrl: './cart-items.component.scss'
+  templateUrl: './shopping-carts.component.html',
+  styleUrl: './shopping-carts.scss'
 })
-export class CartItemsComponent implements OnInit, DoCheck {
+export class shoppingCartsComponent implements OnInit, DoCheck {
   cartItems: CartItemInterface[] = [];
 
-  subtotal?: number = 0;
-  tax?: number = 0;
-  delivery?: number = 1.33;
-  total?: number = 0;
+  subtotal = 0;
+  tax = 0;
+  delivery = 1.33;
+  total = 0;
 
   constructor(private cartService: CartService) {}
 
@@ -35,7 +35,6 @@ export class CartItemsComponent implements OnInit, DoCheck {
 
   updateCart() {
     this.cartService.saveCart(this.cartItems);
-    this.loadCart();
   }
 
   removeItem(itemId: string) {
@@ -45,7 +44,6 @@ export class CartItemsComponent implements OnInit, DoCheck {
 
   handleAddonUpdate(event: { itemId: string; addonName: string }) {
     this.cartService.updateCartItemAddon(event.itemId, event.addonName);
-    this.loadCart(); 
   }
 
   calculateTotals() {
@@ -62,7 +60,7 @@ export class CartItemsComponent implements OnInit, DoCheck {
       return sum + itemTotal;
     }, 0);
   
-    this.tax = this.subtotal * 0.10; //податок урааа(ні)
+    this.tax = this.subtotal * 0.10;
     this.total = this.subtotal + this.tax + this.delivery!;
   }
 }

@@ -7,9 +7,6 @@ import { CartItemInterface, FoodItemInterface } from '../interfaces/restaurant-c
 export class CartService {
   private cartKey = 'cartItems';
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
-
   getCart(): CartItemInterface[] {
     const storedCart = localStorage.getItem(this.cartKey);
     return storedCart ? JSON.parse(storedCart) : [];
@@ -27,16 +24,17 @@ export class CartService {
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      const newItem: CartItemInterface = {
-        id: item.id,
-        name: item.name,
-        imgUrl: item.imgUrl,
-        price: item.price,
-        quantity,
-        addon,
-        addons: item.addons || [] 
-      };
+    //   const newItem: CartItemInterface = {
+    //     id: item.id,
+    //     name: item.name,
+    //     imgUrl: item.imgUrl,
+    //     price: item.price,
+    //     quantity,
+    //     addon,
+    //     addons: item.addons || [] 
+    //   };
 
+    const newItem: CartItemInterface = { ...item, quantity, addon }
       cartItems.push(newItem);
     }
 
