@@ -24,16 +24,6 @@ export class CartService {
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-    //   const newItem: CartItemInterface = {
-    //     id: item.id,
-    //     name: item.name,
-    //     imgUrl: item.imgUrl,
-    //     price: item.price,
-    //     quantity,
-    //     addon,
-    //     addons: item.addons || [] 
-    //   };
-
     const newItem: CartItemInterface = { ...item, quantity, addon }
       cartItems.push(newItem);
     }

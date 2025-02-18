@@ -10,7 +10,7 @@ import { CartItemComponent } from '../../shared/cart-item/cart-item.component';
   templateUrl: './shopping-carts.component.html',
   styleUrl: './shopping-carts.scss'
 })
-export class shoppingCartsComponent implements OnInit, DoCheck {
+export class ShoppingCartsComponent implements OnInit, DoCheck {
   cartItems: CartItemInterface[] = [];
 
   subtotal = 0;

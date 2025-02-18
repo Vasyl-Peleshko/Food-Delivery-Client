@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ItemCardInterface } from '../interfaces/restaurant-card.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators'
+import { map, shareReplay, tap } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +30,30 @@ export class RestaurantService {
 
   getRestaurantById(id: string): Observable<ItemCardInterface> {
     return this.http.get<ItemCardInterface>(`${this.apiUrl}/${id}`);
+  }
+
+  getFilteredRestaurants(filters: { rating?: number | null, categories?: string[], sortBy?: string | null, name?: string | null }): Observable<ItemCardInterface[]> {
+    let params = new HttpParams();
+
+    if (filters.rating !== null && filters.rating !== undefined) {
+      params = params.set('rating', filters.rating.toString());
+    }
+
+    if (filters.categories && filters.categories.length > 0) {
+      params = params.set('categories', filters.categories.join(','));
+    }
+
+    if (filters.sortBy) {
+      params = params.set('sortBy', filters.sortBy);
+    }
+
+    if (filters.name) {
+      params = params.set('name', filters.name); 
+  }
+
+    return this.http.get<ItemCardInterface[]>(this.apiUrl, { params }).pipe(
+      shareReplay(1) 
+    );
   }
 
   addToFavorites(restaurant: ItemCardInterface): void {

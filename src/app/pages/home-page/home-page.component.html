@@ -13,12 +13,75 @@
 
     <div class="flex flex-col gap-4 bg-[#2D2D3A] p-4">
         <!-- ORDER HEADER: Displays the main order prompt -->
-        <div class="flex items-center justify-center pb-20">
+        <div class="flex items-center justify-center pb-5">
             <span class="text-white text-3xl font-light">
                 What would you like to order
             </span>
         </div>
 
+        <div class="flex items-center gap-2 bg-[#3B3B4F] p-3 rounded-lg">
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 9.5 2a7.5 7.5 0 0 0 7.15 10.65z">
+                </path>
+            </svg>
+            <input type="text"
+                placeholder="Find for food or restaurant..."
+                class="bg-transparent outline-none text-white placeholder-gray-400 flex-1"
+                [formControl]="searchControl"
+                (blur)="onSearchBlur()"
+                >
+
+            <button class="p-2 rounded-lg bg-[#FF6600]" (click)="toggleFilterSidebar()">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    
+        <!-- CATEGORY SELECTION -->
+        <div class="overflow-x-auto scrollbar-hide">
+            <div class="flex gap-4 w-max px-2">
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#FF6600] text-white">
+                    <img src="assets/fast-food-icon.png" alt="Burger" class="w-12 h-12">
+                    <span>Burger</span>
+                </button>
+    
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+                    <img src="assets/donut-icon.png" alt="Donut" class="w-12 h-12">
+                    <span>Donut</span>
+                </button>
+    
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+                    <img src="assets/pizza-icon.png" alt="Pizza" class="w-12 h-12">
+                    <span>Pizza</span>
+                </button>
+    
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+                    <img src="assets/mexican-icon.png" alt="Mexican" class="w-12 h-12">
+                    <span>Mexican</span>
+                </button>
+    
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+                    <img src="assets/asian-icon.png" alt="Asian" class="w-12 h-12">
+                    <span>Asian</span>
+                </button>
+    
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+                    <img src="assets/sushi-icon.png" alt="Sushi" class="w-12 h-12">
+                    <span>Sushi</span>
+                </button>
+    
+                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+                    <img src="assets/dessert-icon.png" alt="Dessert" class="w-12 h-12">
+                    <span>Dessert</span>
+                </button>
+            </div>
+        </div>
         <!-- FEATURED RESTAURANTS SECTION -->
         <div>
             <span class="text-white text-xl font-light ml-3">
@@ -125,3 +188,82 @@
 <ng-template #loading>
     <span class="text-sm text-gray-400">Loading...</span>
 </ng-template>
+
+<div [ngClass]="{'translate-x-0': isFilterSidebarOpen, '-translate-x-full': !isFilterSidebarOpen}"
+    class="fixed top-0 left-0 w-full h-full bg-[#2D2D3A] shadow-lg z-50 transition-transform duration-300">
+
+    <!-- Кнопка закриття -->
+    <button (click)="closeFilterSidebar()" class="absolute top-6 left-4 text-white text-2xl">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
+
+    <div class="p-6 text-white">
+        <h2 class="text-lg font-semibold mb-6 text-center">Filter</h2>
+
+        <!-- Cuisines -->
+        <div class="mb-6">
+            <h3 class="text-md font-medium mb-3">Cuisines</h3>
+            <div class="flex flex-wrap gap-3">
+                <button *ngFor="let category of categories"
+                    (click)="toggleCategory(category)"
+                    [class.selected]="categoryControl.value?.includes(category.toLowerCase())"
+                    class="cuisine-button">
+                    <img src="assets/{{ category.toLowerCase().replace(' ', '-') }}-icon.png" alt="{{ category }}" class="icon">
+                    {{ category }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Short by -->
+        <div class="mb-6">
+            <h3 class="text-md font-medium mb-3">Short by</h3>
+            <div class="flex flex-wrap gap-3">
+                <button *ngFor="let sort of sortOptions"
+                    (click)="selectSortBy(sort.value)"
+                    [class.selected]="sortControl.value === sort.value"
+                    class="short-button">
+                    {{ sort.label }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="mb-6">
+            <h3 class="text-md font-medium mb-3">Rating</h3>
+            <div class="flex gap-3">
+                <button *ngFor="let rating of ratings"
+                    (click)="selectRating(rating)"
+                    [class.selected]="ratingControl.value === rating"
+                    class="rating-button">
+                    <span>{{ rating }}</span> ⭐
+                </button>
+            </div>
+        </div>
+
+        <!-- Price range -->
+        <div class="mb-10">
+            <div class="flex items-center justify-between text-white mb-3">
+                <h3 class="text-md font-medium">Price range</h3>
+                <span>${{ minPrice }} - ${{ maxPrice }}</span>
+            </div>
+
+            <div class="relative w-full">
+                <div class="absolute top-1/2 left-0 w-full h-[2px] bg-gray-500"></div>
+
+                <input type="range" min="5" max="500" [(ngModel)]="minPrice"
+                    class="range-slider left-0" (input)="updateRange()">
+                <input type="range" min="5" max="500" [(ngModel)]="maxPrice"
+                    class="range-slider right-0" (input)="updateRange()">
+            </div>
+        </div>  
+
+        <!-- Кнопки -->
+        <div class="flex gap-4 mt-20">
+            <button class="filter-button reset" (click)="resetFilters()">RESET</button>
+            <button class="filter-button apply" (click)="applyFilters()">APPLY</button>
+        </div>
+    </div>
+</div>

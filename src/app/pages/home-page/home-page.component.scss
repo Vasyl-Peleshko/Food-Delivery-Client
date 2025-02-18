@@ -10,3 +10,123 @@
 .shift-content {
     transform: translateX(250px);
 }
+
+.cuisine-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background-color: #3B3B4F;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.cuisine-button .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.cuisine-button:hover {
+    background-color: #FF6600;
+    transform: scale(1.05);
+}
+
+.short-button {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #3B3B4F;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.short-button:hover {
+    background-color: #FF6600;
+    transform: scale(1.05);
+}
+
+.rating-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background-color: #3B3B4F;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.rating-button:hover {
+    background-color: #FF6600;
+    transform: scale(1.05);
+}
+
+.range-slider {
+    position: absolute;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: transparent;
+    pointer-events: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 3px solid #FF6600;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.range-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 3px solid #FF6600;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.filter-button {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.reset {
+    background-color: #3B3B4F;
+    color: white;
+}
+
+.reset:hover {
+    background-color: #4A4A5E;
+}
+
+.apply {
+    background-color: #FF6600;
+    color: white;
+}
+
+.apply:hover {
+    background-color: #E65C00;
+}
+
+.selected {
+    background-color: #FF6600 !important;
+    color: white !important;
+    transition: all 0.2s ease-in-out;
+}
