@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CardConfigInterface } from '../../components/primary-card/primary-card.component';
 import { CommonModule } from '@angular/common';
 import { ReviewFormatterPipe } from '../../shared/pipes/review-formatter.pipe';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'fd-food-details',
@@ -19,10 +20,15 @@ export class FoodDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private cartService: CartService,
   ) {}
 
   ngOnInit(): void {
     this.foodItem = this.route.snapshot.data['foodItem'];
+  }
+
+  addToCart() {    
+    this.cartService.addToCart(this.foodItem, this.quantity, this.selectedAddon);
   }
 
   toggleText() {

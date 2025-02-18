@@ -1,0 +1,52 @@
+<div class="bg-[#2D2D3A] min-h-screen p-4">
+  <div class="flex items-center justify-between p-4 text-white">
+    <button class="bg-gray-700 p-2 rounded-full flex items-center justify-center">
+        <img src="assets/back-icon.png" alt="Back" class="w-5 h-5" />
+    </button>
+    <h1 class="text-xl font-bold">Cart</h1>
+    <div class="relative">
+      <button class="bg-gray-700 p-2 rounded-full">🛍️</button>
+      <span
+        class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+      >
+        {{ cartItems.length }}
+      </span>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <fd-cart-item
+      *ngFor="let item of cartItems"
+      [item]="item"
+      (addonUpdated)="handleAddonUpdate($event)" 
+      (itemUpdated)="updateCart()"
+      (itemRemoved)="removeItem($event)">
+    </fd-cart-item>
+  </div>
+
+  <div class="p-4 mt-6 rounded-lg text-white space-y-3 mb-10">
+    <div class="flex justify-between">
+      <span class="text-gray-400">Subtotal</span>
+      <span class="font-semibold">{{ subtotal | currency:'USD' }}</span>
+    </div>
+
+    <div class="flex justify-between">
+      <span class="text-gray-400">Tax and Fees</span>
+      <span class="font-semibold">{{ tax | currency:'USD' }}</span>
+    </div>
+
+    <div class="flex justify-between">
+      <span class="text-gray-400">Delivery</span>
+      <span class="font-semibold">{{ delivery | currency:'USD' }}</span>
+    </div>
+
+    <div class="border-t border-gray-500 my-2"></div>
+
+    <div class="flex justify-between items-center">
+      <div class="text-gray-300 text-sm">
+        <span class="text-gray-400">(</span> {{ cartItems.length }} items <span class="text-gray-400">)</span>
+      </div>
+      <span class="text-xl font-bold">{{ total | currency:'USD' }}</span>
+    </div>
+  </div>
+</div>

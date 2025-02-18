@@ -20,7 +20,7 @@
       </div>
     
       <div class="flex items-center justify-between mt-2">
-        <p class="text-2xl font-bold">$9.50</p>
+        <p class="text-2xl font-bold">{{foodItem.price | currency:'USD'}}</p>
     
         <div class="flex items-center space-x-4">
           <button 
@@ -71,7 +71,8 @@
 
   <div class="flex justify-center items-center p-10 rounded-lg">
       <button class="bg-[#FE724C] text-white font-semibold flex items-center px-6 py-3 rounded-full shadow-[0px_4px_15px_rgba(254,114,76,0.5)] 
-                    hover:bg-[#fd5c34] transition-all">
+              hover:bg-[#fd5c34] transition-all"
+              (click)="addToCart()">
           <span class="bg-white bg-opacity-20 p-2 rounded-full mr-4 flex items-center justify-center">
               <img src="/assets/bag-icon-button.png" alt="Lock" class="w-5 h-5 filter-orange">
           </span>

@@ -10,7 +10,7 @@ export const foodDetailsRoutes: Routes = [
     data: {
         displayHeader: false,
         displayBackButton: false,
-        displayFooter: false,
+        displayFooter: true,
         isHeaderTransparent: false,
         headerTitle: 'Search Food',
         displayHeaderIcon: false
