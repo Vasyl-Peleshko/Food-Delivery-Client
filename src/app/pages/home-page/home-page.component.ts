@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ItemCardInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { RestaurantService } from '../../shared/services/restaurant.service';
 import { CardConfigInterface, PrimaryCardComponent } from '../../components/primary-card/primary-card.component';
@@ -62,7 +62,7 @@ export class HomePageComponent implements OnInit {
 
   // authorization part
   loadUser() {
-    this.authService.getUser().subscribe({
+    this.authService.getCachedUser().subscribe({
       next: (userData) => this.user = userData, 
       error: (err) => console.error('Error fetching user:', err)
     });
@@ -127,11 +127,7 @@ export class HomePageComponent implements OnInit {
       sortBy: this.sortControl.value
     };
   
-    this.restaurants$ = this.restaurantsService.getFilteredRestaurants(filters).pipe(
-      switchMap(res => {
-        return [res]; 
-      })
-    );
+    this.restaurants$ = this.restaurantsService.getFilteredRestaurants(filters);
     this.resetFilters();
     this.closeFilterSidebar();
   }

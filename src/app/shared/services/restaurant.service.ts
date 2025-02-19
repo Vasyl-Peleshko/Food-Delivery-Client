@@ -4,6 +4,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators'
+import { CommonHelper } from '../helpers/common-helper';
+
+export interface FilterOptions extends Record<string, unknown> {
+  rating?: number | null;
+  categories?: string[];
+  sortBy?: string | null;
+  name?: string | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,25 +41,27 @@ export class RestaurantService {
     return this.http.get<ItemCardInterface>(`${this.apiUrl}/${id}`);
   }
 
-  getFilteredRestaurants(filters: { rating?: number | null, categories?: string[], sortBy?: string | null, name?: string | null }): Observable<ItemCardInterface[]> {
+  getFilteredRestaurants(filters: FilterOptions): Observable<ItemCardInterface[]> {
+    const cleanedFilters = CommonHelper.removeBlankAttributes(filters); 
+
     let params = new HttpParams();
 
-    if (filters.rating !== null && filters.rating !== undefined) {
-      params = params.set('rating', filters.rating.toString());
+    if (cleanedFilters.rating) {
+        params = params.set('rating', cleanedFilters.rating.toString());
     }
 
-    if (filters.categories && filters.categories.length > 0) {
-      params = params.set('categories', filters.categories.join(','));
+    if (cleanedFilters.categories && cleanedFilters.categories.length > 0) {
+        params = params.set('categories', cleanedFilters.categories.join(','));
     }
 
-    if (filters.sortBy) {
-      params = params.set('sortBy', filters.sortBy);
+    if (cleanedFilters.sortBy) {
+        params = params.set('sortBy', cleanedFilters.sortBy);
     }
 
-    if (filters.name) {
-      params = params.set('name', filters.name); 
-  }
-
+    if (cleanedFilters.name) {
+        params = params.set('name', cleanedFilters.name);
+    }
+    
     return this.http.get<ItemCardInterface[]>(this.apiUrl, { params }).pipe(
       shareReplay(1) 
     );

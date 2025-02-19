@@ -33,7 +33,7 @@
     transform: scale(1.05);
 }
 
-.short-button {
+.sort-button {
     display: flex;
     align-items: center;
     padding: 8px 16px;
@@ -44,7 +44,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.short-button:hover {
+.sort-button:hover {
     background-color: #FF6600;
     transform: scale(1.05);
 }

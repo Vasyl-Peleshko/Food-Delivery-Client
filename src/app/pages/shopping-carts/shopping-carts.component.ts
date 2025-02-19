@@ -2,7 +2,7 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import { CartItemInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { CartService } from '../../shared/services/cart.service';
 import { CommonModule } from '@angular/common';
-import { CartItemComponent } from '../../shared/cart-item/cart-item.component';
+import { CartItemComponent } from '../../components/cart-item/cart-item.component';
 
 @Component({
   selector: 'fd-shopping-carts',

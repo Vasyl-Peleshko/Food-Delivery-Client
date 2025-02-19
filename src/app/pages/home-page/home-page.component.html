@@ -217,14 +217,14 @@
             </div>
         </div>
 
-        <!-- Short by -->
+        <!-- Sort by -->
         <div class="mb-6">
-            <h3 class="text-md font-medium mb-3">Short by</h3>
+            <h3 class="text-md font-medium mb-3">Sort by</h3>
             <div class="flex flex-wrap gap-3">
                 <button *ngFor="let sort of sortOptions"
                     (click)="selectSortBy(sort.value)"
                     [class.selected]="sortControl.value === sort.value"
-                    class="short-button">
+                    class="sort-button">
                     {{ sort.label }}
                 </button>
             </div>
@@ -260,7 +260,7 @@
             </div>
         </div>  
 
-        <!-- Кнопки -->
+        <!-- Buttons -->
         <div class="flex gap-4 mt-20">
             <button class="filter-button reset" (click)="resetFilters()">RESET</button>
             <button class="filter-button apply" (click)="applyFilters()">APPLY</button>
