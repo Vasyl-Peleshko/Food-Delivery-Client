@@ -5,11 +5,20 @@ import { environment } from '../../../environments/environment';
 import { RoutingConstants } from '../constants/routing-constants';
 import { shareReplay, tap } from 'rxjs/operators';
 
+export interface DeliveryAddress {
+  region: string;
+  city: string;
+  street: string;
+  novaPostDepartment: string;
+}
+
 export interface User {
   email: string;
   name: string;
+  age?: number;
+  phoneNumber?: string;
+  deliveryAddress?: Partial<DeliveryAddress>;
 }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +57,16 @@ export class AuthService {
         this.saveToken(response.token);
         this.getUser().subscribe(); 
       })
+    );
+  }
+
+  editUser(user: User): Observable<User> {
+    if (!user.name || !user.email) {
+      throw new Error('Name and email is required');
+    }
+
+    return this.http.patch<User>(`${this.apiUrl}/user`, user).pipe(
+      tap(user => this.userCache.next(user)),
     );
   }
 

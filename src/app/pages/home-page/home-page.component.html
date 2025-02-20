@@ -156,7 +156,12 @@
             <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3">
                 📦 <span>My Orders</span>
             </li>
-            <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3">
+            <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3"
+                (click)="navigateToProfile()"
+                (keydown.enter)="navigateToProfile()"
+                (keydown.space)="navigateToProfile()"
+                role="button"
+                tabindex="0">
                 👤 <span>My Profile</span>
             </li>
             <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3">

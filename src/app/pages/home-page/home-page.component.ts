@@ -12,7 +12,7 @@ import { FiltersService } from '../../shared/services/filters.service';
 
 @Component({
   selector: 'fd-home-page',
-  imports: [PrimaryCardComponent, AsyncPipe, CommonModule, FormsModule, ReactiveFormsModule ],
+  imports: [PrimaryCardComponent, AsyncPipe, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -58,6 +58,10 @@ export class HomePageComponent implements OnInit {
   
   navigateToRestaurant(id: string): void {
     this.router.navigate([`/${RoutingConstants.RESTAURANTS}/${id}`]);
+  }
+
+  navigateToProfile() {
+    this.router.navigate([`${RoutingConstants.PROFILE}`]);
   }
 
   // authorization part
