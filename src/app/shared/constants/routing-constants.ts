@@ -5,5 +5,6 @@ export const RoutingConstants = {
     AUTH: 'auth',
     RESTAURANTS: 'restaurants',
     FOODITEMS: 'food-items',
-    CART: 'cart'
+    CART: 'cart',
+    PROFILE: 'profile',
 };
