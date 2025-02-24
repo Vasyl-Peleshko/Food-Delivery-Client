@@ -5,7 +5,8 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RoutingConstants } from './shared/constants/routing-constants';
-import { shoppingCartsComponent } from './pages/shopping-carts/shopping-carts.component';
+import { ShoppingCartsComponent } from './pages/shopping-carts/shopping-carts.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,19 @@ export const routes: Routes = [
           isHeaderTransparent: false,
           headerTitle: 'Search Food',
           displayHeaderIcon: true
+        },
+      },
+      {
+        path: RoutingConstants.PROFILE,
+        component: UserProfileComponent,
+        canActivate: [AuthGuard],
+        data: {
+          displayHeader: false,
+          displayBackButton: false,
+          displayFooter: false,
+          displayTitle: false,
+          headerTitle: 'Edit Profile',
+          isHeaderTransparent: false
         }
       },
       {
@@ -43,7 +57,7 @@ export const routes: Routes = [
       },
       {
         path: RoutingConstants.CART,
-        component: shoppingCartsComponent,
+        component: ShoppingCartsComponent,
         data: {
           displayHeader: false,
           displayBackButton: false,

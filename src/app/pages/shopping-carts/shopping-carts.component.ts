@@ -2,7 +2,7 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import { CartItemInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { CartService } from '../../shared/services/cart.service';
 import { CommonModule } from '@angular/common';
-import { CartItemComponent } from '../../shared/cart-item/cart-item.component';
+import { CartItemComponent } from '../../components/cart-item/cart-item.component';
 
 @Component({
   selector: 'fd-shopping-carts',
@@ -10,7 +10,7 @@ import { CartItemComponent } from '../../shared/cart-item/cart-item.component';
   templateUrl: './shopping-carts.component.html',
   styleUrl: './shopping-carts.scss'
 })
-export class shoppingCartsComponent implements OnInit, DoCheck {
+export class ShoppingCartsComponent implements OnInit, DoCheck {
   cartItems: CartItemInterface[] = [];
 
   subtotal = 0;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CartItemInterface } from '../interfaces/restaurant-card.interface';
+import { CartItemInterface } from '../../shared/interfaces/restaurant-card.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({

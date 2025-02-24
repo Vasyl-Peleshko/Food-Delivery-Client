@@ -1,48 +1,83 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {  map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { RoutingConstants } from '../constants/routing-constants';
+import { shareReplay, tap } from 'rxjs/operators';
 
-export interface User{
-  email: string,
-  name: string,
+export interface DeliveryAddress {
+  region: string;
+  city: string;
+  street: string;
+  novaPostDepartment: string;
+}
+
+export interface User {
+  email: string;
+  name: string;
+  age?: number;
+  phoneNumber?: string;
+  deliveryAddress?: Partial<DeliveryAddress>;
 }
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/${RoutingConstants.AUTH}`; 
+  private apiUrl = `${environment.apiUrl}/${RoutingConstants.AUTH}`;
+  public userCache = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) {}
 
-  register(userData: { email: string; password: string }): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/register`, userData).pipe(
-      tap(response => this.saveToken(response.token))
+  getUser(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/user`).pipe(
+      tap(user => this.userCache.next(user)),
+      shareReplay(1)
     );
+  }
+
+  getCachedUser(): Observable<User | null> {
+    if (this.userCache.value) {
+      return this.userCache.asObservable();
+    }
+    return this.getUser();
   }
 
   login(userData: { email: string; password: string }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, userData).pipe(
-      tap(response => this.saveToken(response.token)),
+      tap(response => {
+        this.saveToken(response.token);
+      })
     );
   }
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/user`).pipe(
-      map(response => response) 
+  register(userData: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/register`, userData).pipe(
+      tap(response => {
+        this.saveToken(response.token);
+      })
+    );
+  }
+
+  editUser(user: User): Observable<User> {
+    if (!user.name || !user.email) {
+      throw new Error('Name and email is required');
+    }
+
+    return this.http.patch<User>(`${this.apiUrl}/user`, user).pipe(
+      tap(user => this.userCache.next(user)),
     );
   }
 
   logout() {
     localStorage.removeItem('token');
+    this.userCache.next(null);
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  saveToken(token: string) {
+  private saveToken(token: string) {
     localStorage.setItem('token', token);
   }
 }

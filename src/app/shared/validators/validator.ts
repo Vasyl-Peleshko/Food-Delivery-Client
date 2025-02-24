@@ -36,3 +36,8 @@ export const nameValidator: ValidatorFn = (control: AbstractControl): Validation
   
     return Object.keys(errors).length ? errors : null;
 };
+
+export const phoneNumberValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const phonePattern = /^[0-9]{10}$/;
+  return control.value && !phonePattern.test(control.value) ? { phoneInvalid: true } : null;
+};
