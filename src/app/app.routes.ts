@@ -35,6 +35,7 @@ export const routes: Routes = [
       {
         path: RoutingConstants.PROFILE,
         component: UserProfileComponent,
+        canActivate: [AuthGuard],
         data: {
           displayHeader: false,
           displayBackButton: false,

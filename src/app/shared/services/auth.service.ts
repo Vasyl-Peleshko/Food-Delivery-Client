@@ -46,7 +46,6 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, userData).pipe(
       tap(response => {
         this.saveToken(response.token);
-        this.getUser().subscribe(); 
       })
     );
   }
@@ -55,7 +54,6 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/register`, userData).pipe(
       tap(response => {
         this.saveToken(response.token);
-        this.getUser().subscribe(); 
       })
     );
   }
