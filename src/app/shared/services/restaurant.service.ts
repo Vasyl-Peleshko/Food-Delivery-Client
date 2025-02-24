@@ -42,31 +42,23 @@ export class RestaurantService {
   }
 
   getFilteredRestaurants(filters: FilterOptions): Observable<ItemCardInterface[]> {
-    const cleanedFilters = CommonHelper.removeBlankAttributes(filters); 
-
+    const cleanedFilters = CommonHelper.removeBlankAttributes({
+      ...filters,
+      categories: filters.categories?.length ? filters.categories.join(',') : undefined
+    });
+  
     let params = new HttpParams();
-
-    if (cleanedFilters.rating) {
-        params = params.set('rating', cleanedFilters.rating.toString());
-    }
-
-    if (cleanedFilters.categories && cleanedFilters.categories.length > 0) {
-        params = params.set('categories', cleanedFilters.categories.join(','));
-    }
-
-    if (cleanedFilters.sortBy) {
-        params = params.set('sortBy', cleanedFilters.sortBy);
-    }
-
-    if (cleanedFilters.name) {
-        params = params.set('name', cleanedFilters.name);
-    }
-    
+    Object.entries(cleanedFilters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        params = params.set(key, value.toString());
+      }
+    });
+  
     return this.http.get<ItemCardInterface[]>(this.apiUrl, { params }).pipe(
-      shareReplay(1) 
+      shareReplay(1)
     );
-  }
-
+  }  
+  
   addToFavorites(restaurant: ItemCardInterface): void {
     if (!this.favoriteRestaurants.includes(restaurant)) {
       this.favoriteRestaurants.push(restaurant);
