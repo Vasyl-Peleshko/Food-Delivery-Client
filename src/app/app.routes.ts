@@ -7,6 +7,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { RoutingConstants } from './shared/constants/routing-constants';
 import { ShoppingCartsComponent } from './pages/shopping-carts/shopping-carts.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { CheckoutResolver } from './pages/checkout/checkout.resolver';
 
 export const routes: Routes = [
   {
@@ -68,6 +70,20 @@ export const routes: Routes = [
           displayHeaderIcon: true
         }
       },
+      {
+        path: RoutingConstants.CHECKOUT,
+        component: CheckoutComponent,
+        resolve: { total: CheckoutResolver },
+        data: {
+          displayHeader: true,
+          displayBackButton: true,
+          displayFooter: false,
+          displayTitle: true,
+          isHeaderTransparent: false,
+          headerTitle: 'Payment',
+          displayHeaderIcon: true
+        }
+      },
     ]
   },
   {
@@ -78,5 +94,5 @@ export const routes: Routes = [
     path: RoutingConstants.LOGIN,
     component: SigninComponent
   },
-  { path: '**', redirectTo: RoutingConstants.HOME, pathMatch: 'full' }
+  { path: '**', redirectTo: RoutingConstants.LOGIN, pathMatch: 'full' }
 ];
