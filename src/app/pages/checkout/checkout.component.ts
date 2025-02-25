@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RoutingConstants } from '../../shared/constants/routing-constants';
 
 @Component({
   selector: 'fd-checkout',
@@ -11,7 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 export class CheckoutComponent implements OnInit {
   total = 0;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.loadTotal();
@@ -28,4 +32,22 @@ export class CheckoutComponent implements OnInit {
     { name: 'PayPal', icon: 'assets/paypal.jpg', selected: false },
     { name: 'Apple Pay', icon: 'assets/apple.jpg', selected: false }
   ];
+
+  selectPaymentMethod(index: number) {
+    this.paymentMethods.forEach(method => method.selected = false);
+
+    this.paymentMethods[index].selected = true;
+  }
+
+  addNewCard() {
+    const selectedMethod = this.paymentMethods.find(method => method.selected) || { name: '', icon: '', selected: false };
+  
+    this.router.navigate([`${RoutingConstants.NEWCARD}`], { 
+      queryParams: {
+        name: selectedMethod.name,
+        icon: selectedMethod.icon,
+        selected: selectedMethod.selected
+      }
+    });
+  }
 }
