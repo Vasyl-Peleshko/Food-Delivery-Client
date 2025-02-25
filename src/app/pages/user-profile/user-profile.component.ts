@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthService, User } from '../../shared/services/auth.service';
-import { NovaPoshtaService, Warehouse } from '../../shared/services/nova-poshta.servic';
+import { NovaPoshtaService, Warehouse } from '../../shared/services/nova-poshta.service';
 import { emailValidator, nameValidator, phoneNumberValidator } from '../../shared/validators/validator';
 import { FormErrorComponent } from '../../components/form-error/form-error.component';
 
