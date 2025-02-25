@@ -9,6 +9,8 @@ import { ShoppingCartsComponent } from './pages/shopping-carts/shopping-carts.co
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CheckoutResolver } from './pages/checkout/checkout.resolver';
+import { NewCardComponent } from './pages/new-card/new-card.component';
+import { NewCardResolver } from './pages/new-card/new-card.resolver';
 
 export const routes: Routes = [
   {
@@ -81,6 +83,20 @@ export const routes: Routes = [
           displayTitle: true,
           isHeaderTransparent: false,
           headerTitle: 'Payment',
+          displayHeaderIcon: true
+        }
+      },
+      {
+        path: RoutingConstants.NEWCARD,
+        component: NewCardComponent,
+        resolve: { paymentMethod: NewCardResolver },
+        data: {
+          displayHeader: true,
+          displayBackButton: true,
+          displayFooter: false,
+          displayTitle: true,
+          isHeaderTransparent: false,
+          headerTitle: 'Add New Card',
           displayHeaderIcon: true
         }
       },

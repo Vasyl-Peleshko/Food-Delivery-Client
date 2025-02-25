@@ -21,14 +21,22 @@
         <h2 class="text-lg font-semibold text-gray-300">Payment Method</h2>
         <div class="flex items-center space-x-4 mt-2">
           
-          <button *ngFor="let method of paymentMethods"
-            class="flex-1 h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 flex items-center justify-center transition-all duration-200"
-            [class.bg-white]="method.selected"
-            [class.shadow-md]="method.selected">
-          
-          <img [src]="method.icon" [alt]="method.name" class="w-full h-full object-cover">
-        
-        </button>
+            <button 
+                (click)="addNewCard()"
+                class="flex items-center justify-center w-16 h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 transition-all duration-200">
+                <span class="text-orange-400 text-3xl font-bold">+</span>
+            </button>
+
+            <button *ngFor="let method of paymentMethods; let i = index"
+                class="flex-1 h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 flex items-center justify-center transition-all duration-200"
+                [class.bg-white]="method.selected"
+                [class.shadow-md]="method.selected"
+                [class.border-orange-400]="method.selected"
+                (click)="selectPaymentMethod(i)"> 
+            
+                <img [src]="method.icon" [alt]="method.name" class="w-full h-full object-cover">
+            
+            </button>
       
         </div>
       </div>      
