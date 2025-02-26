@@ -19,36 +19,43 @@
       
       <div>
         <h2 class="text-lg font-semibold text-gray-300">Payment Method</h2>
-        <div class="flex items-center space-x-4 mt-2">
-          
-          <button *ngFor="let method of paymentMethods"
-            class="flex-1 h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 flex items-center justify-center transition-all duration-200"
-            [class.bg-white]="method.selected"
-            [class.shadow-md]="method.selected">
-          
-          <img [src]="method.icon" [alt]="method.name" class="w-full h-full object-cover">
-        
-        </button>
-      
+    
+        <div class="grid grid-cols-3 gap-4 mt-2">
+
+            <button (click)="addNewCard()"
+                class="flex items-center justify-center h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 transition-all duration-200">
+                <span class="text-orange-400 text-3xl font-bold">+</span>
+            </button>
+    
+            <button *ngFor="let method of paymentMethods; let i = index"
+                class="h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 flex items-center justify-center transition-all duration-200"
+                [class.bg-white]="method.selected"
+                [class.shadow-md]="method.selected"
+                [class.border-orange-400]="method.selected"
+                (click)="selectPaymentMethod(i)"> 
+                <img [src]="method.icon" [alt]="method.fullName" class="w-full h-full object-cover">
+            </button>
         </div>
-      </div>      
+    </div>    
   
-      <div class="bg-gradient-to-r from-pink-500 to-purple-500 p-6 rounded-2xl relative shadow-md w-full h-50 flex flex-col justify-between">
+    <div class="bg-gradient-to-r from-pink-500 to-purple-500 p-6 rounded-2xl relative shadow-md w-full h-50 flex flex-col justify-between"
+        *ngIf="selectedCard && selectedCard.fullName !== 'PayPal' && selectedCard.fullName !== 'Apple Pay'">
 
         <h2 class="text-sm font-semibold text-gray-200">Credit Card</h2>
-      
+    
         <div class="mt-2 text-lg font-bold tracking-widest flex justify-between">
-          <span>5341</span>
-          <span>1512448</span>
-          <span>54887</span>
+            <span>{{ selectedCard.cardNumber?.slice(0, 4) || '****' }}</span>
+            <span>{{ selectedCard.cardNumber?.slice(4, 8) || '****' }}</span>
+            <span>{{ selectedCard.cardNumber?.slice(8, 12) || '****' }}</span>
+            <span>{{ selectedCard.cardNumber?.slice(12, 16) || '****' }}</span>
         </div>
-      
+    
         <div class="flex justify-between items-center mt-2">
-          <p class="text-gray-300 text-sm">ARLENE MCCOY</p>
-          <img src="assets/mastercard-icon.jpg" alt="MasterCard" class="w-10">
+            <p class="text-gray-300 text-sm">{{ selectedCard.fullName || 'No Name' }}</p>
+            <img [src]="selectedCard.icon" [alt]="selectedCard.fullName" class="w-10">
         </div>
-      
-      </div>
+
+    </div>
       
       <div class="flex justify-between items-center">
         <p class="text-lg font-semibold text-gray-300">Total Pay</p>

@@ -8,4 +8,5 @@ export const RoutingConstants = {
     CART: 'cart',
     PROFILE: 'profile',
     CHECKOUT: 'checkout',
+    NEWCARD: 'new-card',
 };

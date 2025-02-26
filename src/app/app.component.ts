@@ -12,10 +12,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoadingService } from './shared/services/loading.service';
 import { delay } from 'rxjs';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CardTypePipe } from './shared/pipes/card-type.pipe';
 
 @Component({
   selector: 'fd-root',
-  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent, MatProgressBarModule, MatSnackBarModule, LayoutComponent],
+  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent, MatProgressBarModule, MatSnackBarModule, LayoutComponent, CardTypePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
