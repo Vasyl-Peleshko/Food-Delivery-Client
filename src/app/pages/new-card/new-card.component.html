@@ -13,15 +13,15 @@
       
         <!-- Card Number Field -->
         <div class="space-y-1">
-          <label class="block text-sm font-medium text-gray-500 mb-1">Card Number</label>
-          <div class="relative">
-            <input type="text" formControlName="cardNumber" placeholder="4561  456892  3521"
-              class="w-full h-14 bg-[#393948] text-white/80 px-5 rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-400 pr-14" />
-            <img [src]="selectedMethod.icon" [alt]="selectedMethod.name"
-              class="absolute right-4 top-1/2 transform -translate-y-1/2 w-8">
-          </div>
-          <fd-form-error [control]="formControls['cardNumber']" fieldName="Card Number"></fd-form-error>
-        </div>
+            <label class="block text-sm font-medium text-gray-500 mb-1">Card Number</label>
+            <div class="relative">
+              <input type="text" formControlName="cardNumber" placeholder="4561  456892  3521"
+                class="w-full h-14 bg-[#393948] text-white/80 px-5 rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-400 pr-14" />
+              <img [src]="cardForm.get('cardNumber')?.value | cardType" alt="Card Type"
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 w-8">
+            </div>
+            <fd-form-error [control]="formControls['cardNumber']" fieldName="Card Number"></fd-form-error>
+        </div>        
         
         <!-- Expiry Date & CVV -->
         <div class="flex space-x-4 space-y-1">

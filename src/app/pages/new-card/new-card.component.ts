@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { nameValidator, cardNumberValidator, expiryDateValidator, cvvValidator } from '../../shared/validators/validator';
 import { FormErrorComponent } from '../../components/form-error/form-error.component';
-import { ActivatedRoute } from '@angular/router';
 import { Payment } from '../../shared/interfaces/payment-card.interface';
 import { NewCard, NewCardService } from '../../shared/services/payment-card.service';
+import { CardTypePipe } from '../../shared/pipes/card-type.pipe';
 
 @Component({
   selector: 'fd-new-card',
-  imports: [CommonModule, ReactiveFormsModule, FormErrorComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormErrorComponent, CardTypePipe],
   templateUrl: './new-card.component.html',
   styleUrl: './new-card.component.scss'
 })
@@ -27,11 +27,9 @@ export class NewCardComponent {
   
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute, 
     private cardService: NewCardService,
   ) {
     this.initForm();
-    this.loadSelectedPayment(); 
   }
   
   private initForm() {
@@ -41,13 +39,6 @@ export class NewCardComponent {
       expiry: ['', [Validators.required, expiryDateValidator]],
       cvv: ['', [Validators.required, cvvValidator]],
       saveCard: [false]
-    });
-  }
-
-  private loadSelectedPayment() {
-    this.route.data.subscribe(data => {
-      this.selectedMethod = data['paymentMethod'];
-        console.log(this.selectedMethod);
     });
   }
 
