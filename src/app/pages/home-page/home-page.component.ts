@@ -9,10 +9,11 @@ import { RoutingConstants } from '../../shared/constants/routing-constants';
 import { AuthService, User } from '../../shared/services/auth.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltersService } from '../../shared/services/filters.service';
+import { IfViewportDirective } from '../../shared/directives/if-viewport.directive';
 
 @Component({
   selector: 'fd-home-page',
-  imports: [PrimaryCardComponent, AsyncPipe, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [PrimaryCardComponent, AsyncPipe, CommonModule, FormsModule, ReactiveFormsModule, IfViewportDirective],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })

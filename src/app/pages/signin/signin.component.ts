@@ -8,10 +8,11 @@ import { emailValidator, passwordValidator } from '../../shared/validators/valid
 import { SocialAuthService, GoogleSigninButtonModule, FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { environment } from '../../../environments/environment';
 import { Subject, Subscription, takeUntil } from 'rxjs';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 
 @Component({
   selector: 'fd-signin',
-  imports: [CommonModule, ReactiveFormsModule, GoogleSigninButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, GoogleSigninButtonModule, TooltipDirective],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
