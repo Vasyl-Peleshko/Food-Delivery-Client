@@ -3,6 +3,8 @@ import { CartItemInterface } from '../../shared/interfaces/restaurant-card.inter
 import { CartService } from '../../shared/services/cart.service';
 import { CommonModule } from '@angular/common';
 import { CartItemComponent } from '../../components/cart-item/cart-item.component';
+import { Router } from '@angular/router';
+import { RoutingConstants } from '../../shared/constants/routing-constants';
 
 @Component({
   selector: 'fd-shopping-carts',
@@ -18,7 +20,10 @@ export class ShoppingCartsComponent implements OnInit, DoCheck {
   delivery = 1.33;
   total = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadCart();
@@ -62,5 +67,11 @@ export class ShoppingCartsComponent implements OnInit, DoCheck {
   
     this.tax = this.subtotal * 0.10;
     this.total = this.subtotal + this.tax + this.delivery!;
+
+    localStorage.setItem('total', JSON.stringify(this.total));
+  }
+
+  goToCheckout() {
+    this.router.navigate([`${RoutingConstants.CHECKOUT}`]);
   }
 }

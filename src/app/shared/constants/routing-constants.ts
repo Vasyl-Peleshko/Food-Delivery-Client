@@ -7,4 +7,6 @@ export const RoutingConstants = {
     FOODITEMS: 'food-items',
     CART: 'cart',
     PROFILE: 'profile',
+    CHECKOUT: 'checkout',
+    NEWCARD: 'new-card',
 };
