@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { RoutingConstants } from '../../shared/constants/routing-constants';
 import { NewCard, NewCardService } from '../../shared/services/payment-card.service';
 import { PayPalService } from '../../shared/services/paypal.service';
-import { IPayPalConfig, NgxPayPalModule } from 'ngx-paypal'; // ✅ Import PayPal module
+import { IPayPalConfig, NgxPayPalModule } from 'ngx-paypal'; 
+import { ApplePayService } from '../../shared/services/stripe.service';
+import { ApplePayModalComponent } from '../../components/apple-pay-modal/apple-pay-modal.component';
 
 @Component({
   selector: 'fd-checkout',
-  imports: [CommonModule, NgxPayPalModule],
+  imports: [CommonModule, NgxPayPalModule, ApplePayModalComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
@@ -20,11 +22,13 @@ export class CheckoutComponent implements OnInit {
   payPal: NewCard = { fullName: 'PayPal', icon: 'assets/paypal.jpg', selected: false };
   selectedCard: NewCard | null = null; 
   payPalConfig?: IPayPalConfig;
+  isApplePayVisible = false;
 
   constructor(
     private router: Router,
     private paymentService: NewCardService,
     private payPalService: PayPalService,
+    private applePayService: ApplePayService
   ) {}
 
   ngOnInit() {
@@ -89,4 +93,12 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
+
+  showApplePayModal() {
+    this.isApplePayVisible = true;
+  }
+
+  hideApplePayModal() {
+    this.isApplePayVisible = false;
+  } 
 }
