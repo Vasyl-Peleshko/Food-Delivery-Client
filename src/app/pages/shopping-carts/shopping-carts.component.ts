@@ -67,9 +67,11 @@ export class ShoppingCartsComponent implements OnInit, DoCheck {
   
     this.tax = this.subtotal * 0.10;
     this.total = this.subtotal + this.tax + this.delivery!;
+
+    localStorage.setItem('total', JSON.stringify(this.total));
   }
 
   goToCheckout() {
-    this.router.navigate([`${RoutingConstants.CHECKOUT}`], { queryParams: { total: this.total } });
+    this.router.navigate([`${RoutingConstants.CHECKOUT}`]);
   }
 }

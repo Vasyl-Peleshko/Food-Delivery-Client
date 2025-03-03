@@ -8,7 +8,7 @@ import { RoutingConstants } from './shared/constants/routing-constants';
 import { ShoppingCartsComponent } from './pages/shopping-carts/shopping-carts.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
-import { CheckoutResolver } from './pages/checkout/checkout.resolver';
+import { NewCardComponent } from './pages/new-card/new-card.component';
 
 export const routes: Routes = [
   {
@@ -73,7 +73,6 @@ export const routes: Routes = [
       {
         path: RoutingConstants.CHECKOUT,
         component: CheckoutComponent,
-        resolve: { total: CheckoutResolver },
         data: {
           displayHeader: true,
           displayBackButton: true,
@@ -81,6 +80,19 @@ export const routes: Routes = [
           displayTitle: true,
           isHeaderTransparent: false,
           headerTitle: 'Payment',
+          displayHeaderIcon: true
+        }
+      },
+      {
+        path: RoutingConstants.NEWCARD,
+        component: NewCardComponent,
+        data: {
+          displayHeader: true,
+          displayBackButton: true,
+          displayFooter: false,
+          displayTitle: true,
+          isHeaderTransparent: false,
+          headerTitle: 'Add New Card',
           displayHeaderIcon: true
         }
       },
@@ -94,5 +106,5 @@ export const routes: Routes = [
     path: RoutingConstants.LOGIN,
     component: SigninComponent
   },
-  { path: '**', redirectTo: RoutingConstants.LOGIN, pathMatch: 'full' }
+  { path: '**', redirectTo: RoutingConstants.HOME, pathMatch: 'full' }
 ];
