@@ -1,5 +1,5 @@
 <!-- HEADER: Contains delivery address and user avatar -->
-<div class="content-wrapper w-full h-full bg-[#2D2D3A]" [ngClass]="{ 'shift-content': isSidebarOpen }">
+<div class="content-wrapper w-full min-h-screen bg-[#2D2D3A]" [ngClass]="{ 'shift-content': isSidebarOpen }">
     <img 
         *ngIf="!isSidebarOpen"
         src="assets/menu-icon.png" 
@@ -13,9 +13,21 @@
 
     <div class="flex flex-col gap-4 bg-[#2D2D3A] p-4">
         <!-- ORDER HEADER: Displays the main order prompt -->
-        <div class="flex items-center justify-center pb-5">
+        <div *fdViewport="'mobile'" class="flex items-center justify-center pb-5">
             <span class="text-white text-3xl font-light">
-                What would you like to order
+                What would you like to order (Mobile)
+            </span>
+        </div>
+
+        <div *fdViewport="'tablet'" class="flex items-center justify-center pb-5">
+            <span class="text-white text-3xl font-light">
+                What would you like to order (Tablet)
+            </span>
+        </div>
+        
+        <div *fdViewport="'desktop'" class="flex items-center justify-center pb-5">
+            <span class="text-white text-3xl font-light">
+                What would you like to order (Desktop)
             </span>
         </div>
 

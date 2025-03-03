@@ -13,10 +13,12 @@ import { LoadingService } from './shared/services/loading.service';
 import { delay } from 'rxjs';
 import { LayoutComponent } from './components/layout/layout.component';
 import { CardTypePipe } from './shared/pipes/card-type.pipe';
+import { TooltipDirective } from './shared/directives/tooltip.directive';
+import { IfViewportDirective } from './shared/directives/if-viewport.directive';
 
 @Component({
   selector: 'fd-root',
-  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent, MatProgressBarModule, MatSnackBarModule, LayoutComponent, CardTypePipe],
+  imports: [RouterOutlet, MatSlideToggleModule, PrimaryCardComponent, SecondaryCardComponent, CommonModule, AsyncPipe, HomePageComponent, ReactiveFormsModule, SignupComponent, MatProgressBarModule, MatSnackBarModule, LayoutComponent, CardTypePipe, TooltipDirective, IfViewportDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

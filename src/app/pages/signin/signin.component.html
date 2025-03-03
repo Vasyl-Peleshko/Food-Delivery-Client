@@ -57,7 +57,8 @@
         </div>
 
         <div class="flex justify-center items-center h-25">
-            <button type="submit" [disabled]="loginForm.invalid" (click)="onEmailPasswordLogin()" class="w-60 bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-2xl font-semibold disabled:opacity-70">
+            <button type="submit" [disabled]="loginForm.invalid" (click)="onEmailPasswordLogin()" class="w-60 bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-2xl font-semibold disabled:opacity-70"
+                    fdTooltip="Enter all fields and click Login">
                 Login
             </button>
         </div>
