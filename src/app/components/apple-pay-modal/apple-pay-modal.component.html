@@ -4,11 +4,11 @@
 
         <div class="mt-4">
             <img *ngIf="qrCodeUrl" [src]="qrCodeUrl" alt="Apple Pay QR Code" class="w-48 h-48 mx-auto">
-            <p *ngIf="!qrCodeUrl" class="text-red-500 font-semibold">❌ QR Code не згенеровано</p>
+            <p *ngIf="!qrCodeUrl" class="text-red-500 font-semibold">❌ QR Code not generated</p>
         </div>
 
         <button (click)="close()" class="mt-4 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900">
-            Закрити
+            Close
         </button>
     </div>
 </div>
