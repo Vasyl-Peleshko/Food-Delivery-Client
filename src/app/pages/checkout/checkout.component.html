@@ -1,5 +1,5 @@
-<div class="bg-[#2D2D3A] min-h-screen flex flex-col flex-grow p-6">
-    <div class="text-white rounded-xl p-2 w-full max-w-md space-y-6 shadow-lg">
+<div class="bg-[#2D2D3A] min-h-screen flex flex-col flex-grow p-6 overflow-hidden">
+    <div class="text-white rounded-xl p-2 w-full max-w-md space-y-6">
       
       <div>
         <h2 class="text-lg font-semibold text-gray-300">Shipping to</h2>
@@ -21,23 +21,39 @@
         <h2 class="text-lg font-semibold text-gray-300">Payment Method</h2>
     
         <div class="grid grid-cols-3 gap-4 mt-2">
-
-            <button (click)="addNewCard()"
-                class="flex items-center justify-center h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 transition-all duration-200">
-                <span class="text-orange-400 text-3xl font-bold">+</span>
-            </button>
-    
-            <button *ngFor="let method of paymentMethods; let i = index"
-                class="h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 flex items-center justify-center transition-all duration-200"
-                [class.bg-white]="method.selected"
-                [class.shadow-md]="method.selected"
-                [class.border-orange-400]="method.selected"
-                (click)="selectPaymentMethod(i)"> 
-                <img [src]="method.icon" [alt]="method.fullName" class="w-full h-full object-cover">
-            </button>
-        </div>
+          <button (click)="addNewCard()"
+              class="flex items-center justify-center h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 transition-all duration-200">
+              <span class="text-orange-400 text-3xl font-bold">+</span>
+          </button>
+      
+          <button *ngFor="let method of paymentMethods; let i = index"
+              class="h-16 bg-transparent border border-gray-500/50 rounded-xl overflow-hidden p-0 flex items-center justify-center transition-all duration-200"
+              [class.bg-white]="method.selected"
+              [class.shadow-md]="method.selected"
+              [class.border-orange-400]="method.selected"
+              (click)="selectPaymentMethod(i)"> 
+              <img [src]="method.icon" [alt]="method.fullName" class="w-full h-full object-cover">
+          </button>
+      
+          <div class="mt-0 flex justify-center w-full col-span-3" *ngIf="selectedCard?.fullName === 'PayPal'">
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+          </div>
+      </div>
+      
+      <div *ngIf="selectedCard?.fullName === 'Apple Pay'" class="mt-4 flex justify-center w-full">
+        <button 
+          class="w-full max-w-md h-20 flex items-center justify-center bg-white text-black rounded-lg shadow-lg border border-gray-300"
+          (click)="showApplePayModal()">
+          <img src="assets/apple.jpg" alt="Apple Pay" class="h-10">
+        </button>
+      </div>      
     </div>    
-  
+
+      <fd-apple-pay-modal 
+        [visible]="isApplePayVisible"
+        (closeModal)="hideApplePayModal()">
+     </fd-apple-pay-modal>
+
     <div class="bg-gradient-to-r from-pink-500 to-purple-500 p-6 rounded-2xl relative shadow-md w-full h-50 flex flex-col justify-between"
         *ngIf="selectedCard && selectedCard.fullName !== 'PayPal' && selectedCard.fullName !== 'Apple Pay'">
 

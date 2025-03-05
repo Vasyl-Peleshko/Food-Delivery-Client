@@ -10,9 +10,9 @@ import {
 import { environment } from '../environments/environment';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { ServerResponseInterceptor } from './shared/interceptors/server-response.interceptor';
+import { provideNgxStripe } from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {
-  
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
@@ -49,5 +49,6 @@ export const appConfig: ApplicationConfig = {
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
       {provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true},
     ],
+      provideNgxStripe(environment.stripePublishableKey), 
   ],  
 };
