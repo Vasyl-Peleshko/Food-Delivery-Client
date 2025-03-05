@@ -65,6 +65,10 @@ export class HomePageComponent implements OnInit {
     this.router.navigate([`${RoutingConstants.PROFILE}`]);
   }
 
+  navigateToMyOrders() {
+    this.router.navigate([`${RoutingConstants.MYORDERS}`]);
+  }
+
   // authorization part
   loadUser() {
     this.authService.getCachedUser().subscribe({
