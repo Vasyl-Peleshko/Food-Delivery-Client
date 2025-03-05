@@ -9,6 +9,7 @@ import { ShoppingCartsComponent } from './pages/shopping-carts/shopping-carts.co
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { NewCardComponent } from './pages/new-card/new-card.component';
+import { OrdersHistoryComponent } from './pages/orders-history/orders-history.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +94,19 @@ export const routes: Routes = [
           displayTitle: true,
           isHeaderTransparent: false,
           headerTitle: 'Add New Card',
+          displayHeaderIcon: true
+        }
+      },
+      {
+        path: RoutingConstants.MYORDERS,
+        component: OrdersHistoryComponent,
+        data: {
+          displayHeader: true,
+          displayBackButton: true,
+          displayFooter: false,
+          displayTitle: true,
+          isHeaderTransparent: false,
+          headerTitle: 'My Orders',
           displayHeaderIcon: true
         }
       },
