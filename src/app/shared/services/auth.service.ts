@@ -6,10 +6,10 @@ import { RoutingConstants } from '../constants/routing-constants';
 import { shareReplay, tap } from 'rxjs/operators';
 
 export interface DeliveryAddress {
-  region: string;
-  city: string;
-  street: string;
-  novaPostDepartment: string;
+  region?: string;
+  city?: string;
+  street?: string;
+  novaPostDepartment?: string;
 }
 
 export interface User {
@@ -28,19 +28,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/user`).pipe(
-      tap(user => this.userCache.next(user)),
-      shareReplay(1)
-    );
-  }
-
-  getCachedUser(): Observable<User | null> {
-    if (this.userCache.value) {
-      return this.userCache.asObservable();
+    getUser(): Observable<User> {
+      return this.http.get<User>(`${this.apiUrl}/user`).pipe(
+        tap(user => this.userCache.next(user)),
+        shareReplay(1)
+      );
     }
-    return this.getUser();
-  }
+
+    getCachedUser(): Observable<User | null> {
+      if (this.userCache.value) {
+        return this.userCache.asObservable();
+      }
+      return this.getUser();
+    }
 
   login(userData: { email: string; password: string }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, userData).pipe(

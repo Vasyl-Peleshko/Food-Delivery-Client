@@ -12,6 +12,8 @@ export interface OrderInterface {
     status: string;
     createdAt: string;
     updatedAt: string;
+    deliveryAddress: DeliveryAddressInterface;
+    restaurantAddress: string;
   }
   
   export interface ProductInterface {
@@ -23,6 +25,27 @@ export interface OrderInterface {
     imgUrl: string;
     rating: number;
     restaurantId: string;
+    ingredients: string[];
+    addons?: AddonInterface[];
+}
+
+export interface AddonInterface {
+  name: string;
+  price: number;
+  countable: boolean;
+}
+
+export interface DeliveryAddressInterface {
+  city: string;
+  novaPostDepartment: string;
+}
+
+export interface CreateOrderDto {
+  products: ProductInterface[];
+  totalPrice: number;
+  status?: string;
+  deliveryAddress: DeliveryAddressInterface;
+  restaurantAddress: string;
 }
 
 @Injectable({
@@ -47,5 +70,9 @@ export class OrderService {
 
   getOrderById(id: string): Observable<OrderInterface> {
     return this.http.get<OrderInterface>(`${this.apiUrl}/${id}`);
+  }
+
+  createOrder(orderData: CreateOrderDto): Observable<OrderInterface> {
+    return this.http.post<OrderInterface>(this.apiUrl, orderData);
   }
 }

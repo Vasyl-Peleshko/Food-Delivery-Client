@@ -10,6 +10,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { NewCardComponent } from './pages/new-card/new-card.component';
 import { OrdersHistoryComponent } from './pages/orders-history/orders-history.component';
+import { OrderTrackingComponent } from './pages/order-tracking/order-tracking.component';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,19 @@ export const routes: Routes = [
         component: OrdersHistoryComponent,
         data: {
           displayHeader: true,
+          displayBackButton: true,
+          displayFooter: false,
+          displayTitle: true,
+          isHeaderTransparent: false,
+          headerTitle: 'My Orders',
+          displayHeaderIcon: true
+        }
+      },
+      {
+        path: RoutingConstants.ORDERTRACKING,
+        component: OrderTrackingComponent,
+        data: {
+          displayHeader: false,
           displayBackButton: true,
           displayFooter: false,
           displayTitle: true,

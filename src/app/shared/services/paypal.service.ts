@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 export class PayPalService {
   private clientId = environment.paypalClientId;
 
-  getPayPalConfig(totalAmount: number): Observable<IPayPalConfig> {
+  getPayPalConfig(totalAmount: number, onPaymentSuccess: () => void): Observable<IPayPalConfig> {
     const roundedTotal = parseFloat(totalAmount.toFixed(2));
 
     return of({
@@ -37,6 +37,8 @@ export class PayPalService {
       onApprove: (data, actions) => {
         actions.order.capture().then((details: any) => {
           console.log('✅ Transaction completed:', details);
+          
+          onPaymentSuccess();
         });
       },
       onError: err => {
