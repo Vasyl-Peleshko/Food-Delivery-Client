@@ -5,8 +5,9 @@ import { RoutingConstants } from '../../shared/constants/routing-constants';
 import { NewCard, NewCardService } from '../../shared/services/payment-card.service';
 import { PayPalService } from '../../shared/services/paypal.service';
 import { IPayPalConfig, NgxPayPalModule } from 'ngx-paypal'; 
-import { ApplePayService } from '../../shared/services/stripe.service';
 import { ApplePayModalComponent } from '../../components/apple-pay-modal/apple-pay-modal.component';
+import { CreateOrderDto, OrderService, ProductInterface } from '../../shared/services/order.service';
+import { AuthService, User } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'fd-checkout',
@@ -23,22 +24,38 @@ export class CheckoutComponent implements OnInit {
   selectedCard: NewCard | null = null; 
   payPalConfig?: IPayPalConfig;
   isApplePayVisible = false;
-
+  restaurantAddress = `McDonald's, просп. Свободи, 35, Львів, Україна`; //hardcode, because i haven`t added a restaurantAddress in database
+  user: User | null = null;
+  products?: ProductInterface[] = [];
+  
   constructor(
     private router: Router,
     private paymentService: NewCardService,
     private payPalService: PayPalService,
-    private applePayService: ApplePayService
+    private orderService: OrderService,
+    private userService: AuthService 
   ) {}
 
   ngOnInit() {
     this.loadTotal();
     this.loadCards();
     this.initPayPal();
+    this.loadProducts();
+    this.getUser();
   }
 
   private loadTotal() {
     this.total = JSON.parse(localStorage.getItem('total') || '0');
+  }
+
+  private loadProducts() {
+    this.products = JSON.parse(localStorage.getItem('cartItems') || '0');
+  }
+
+  private getUser() {
+    this.userService.getCachedUser().subscribe(user => {
+      this.user = user;
+    }); 
   }
 
   private loadCards() {
@@ -83,8 +100,36 @@ export class CheckoutComponent implements OnInit {
     this.router.navigate([`${RoutingConstants.NEWCARD}`]);
   }
 
+  placeOrder(): void {
+    if (!this.user) {
+      console.error('❌ User not found');
+      return;
+    }
+
+    const orderData: CreateOrderDto = {
+      products: this.products ?? [],
+      totalPrice: this.total,
+      deliveryAddress: {
+        city: this.user?.deliveryAddress?.city ?? '',
+        novaPostDepartment: this.user?.deliveryAddress?.novaPostDepartment ?? ''
+      },
+      restaurantAddress: this.restaurantAddress,
+    };
+
+    this.orderService.createOrder(orderData).subscribe(response => {
+      console.log('✅ Order created successfully:', response);
+      // localStorage.removeItem('cart');
+      // localStorage.removeItem('total');
+
+      this.router.navigate([RoutingConstants.ORDERTRACKING]);
+
+    }, error => {
+      console.error('❌ Error creating order:', error);
+    });
+  }
+  
   private initPayPal(): void {
-    this.payPalService.getPayPalConfig(this.total).subscribe(
+    this.payPalService.getPayPalConfig(this.total, () => this.placeOrder()).subscribe(
       (config: IPayPalConfig) => {
         this.payPalConfig = config;
       },
