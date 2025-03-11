@@ -11,6 +11,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { NewCardComponent } from './pages/new-card/new-card.component';
 import { OrdersHistoryComponent } from './pages/orders-history/orders-history.component';
 import { OrderTrackingComponent } from './pages/order-tracking/order-tracking.component';
+import { FeedbackComponentComponent } from './pages/feedback-component/feedback-component.component';
+import { RestaurantResolver } from './pages/restaurant-details/restaurant.resolver';
 
 export const routes: Routes = [
   {
@@ -121,6 +123,20 @@ export const routes: Routes = [
           displayTitle: true,
           isHeaderTransparent: false,
           headerTitle: 'My Orders',
+          displayHeaderIcon: true
+        }
+      },
+      {
+        path: `${RoutingConstants.FEEDBACK}/:id`,
+        component: FeedbackComponentComponent,
+        resolve: { restaurant: RestaurantResolver }, 
+        data: {
+          displayHeader: false,
+          displayBackButton: true,
+          displayFooter: false,
+          displayTitle: true,
+          isHeaderTransparent: false,
+          headerTitle: 'Feedback',
           displayHeaderIcon: true
         }
       },

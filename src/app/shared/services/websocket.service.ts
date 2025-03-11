@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -37,12 +38,20 @@ export class WebSocketService {
   listenToCourierUpdates(): Observable<CourierUpdate> {
     return new Observable(observer => {
       this.socket.onmessage = (event) => {
-        const data: CourierUpdate = JSON.parse(event.data);
-        if (data.event === 'orderUpdate') {
-          console.log(`📩 New courier location received: Lat ${data.location.lat}, Lng ${data.location.lng}`);
-          observer.next(data);
+        try {
+          const data: any = JSON.parse(event.data);
+
+          if (data) {
+            console.log(data);
+            
+            observer.next(data);
+          } else {
+            console.warn("⚠️ Unrecognized message format:", data);
+          }
+        } catch (error) {
+          console.error("❌ Error parsing message:", error);
         }
       };
     });
-  }
+  }  
 }

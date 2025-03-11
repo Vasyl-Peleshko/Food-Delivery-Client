@@ -73,6 +73,8 @@ export class OrderService {
   }
 
   createOrder(orderData: CreateOrderDto): Observable<OrderInterface> {
+    console.log(orderData);
+    
     return this.http.post<OrderInterface>(this.apiUrl, orderData);
   }
 }

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from '../../shared/services/websocket.service';
 import { AuthService, User } from '../../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { RoutingConstants } from '../../shared/constants/routing-constants';
 
 @Component({
   selector: 'fd-order-tracking',
@@ -27,7 +29,7 @@ export class OrderTrackingComponent implements OnInit {
     status: [
       { label: 'Order confirmed', time: '12:30 PM', completed: true },
       { label: 'Preparing Food', time: '12:40 PM', completed: true },
-      { label: 'Food on the way', time: '12:42 PM', completed: false },
+      { label: 'Food on the way', time: '12:42 PM', completed: true },
       { label: 'Delivered to you', time: '02:50 PM', completed: false },
     ],
     courier: {
@@ -36,7 +38,11 @@ export class OrderTrackingComponent implements OnInit {
     }
   };
 
-  constructor(private webSocketService: WebSocketService, private userService: AuthService) {}
+  constructor(
+    private webSocketService: WebSocketService, 
+    private userService: AuthService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((user: User) => {
@@ -48,21 +54,48 @@ export class OrderTrackingComponent implements OnInit {
       this.loading = false;
     });
   
-    let lastLocation = { lat: 0, lng: 0 };
+    this.subscribeToCourierUpdates();
+  }
+  
+  private subscribeToCourierUpdates(): void {
+    let lastLocation: { lat: number, lng: number } = { lat: 0, lng: 0 }; 
   
     this.webSocketService.listenToCourierUpdates().subscribe((data: any) => {
-      if (data?.location) {
-        lastLocation = data.location;
-        this.updateCourierLocation(data.location.lat, data.location.lng);
-        console.log(`📍 Courier moving to: Lat ${data.location.lat}, Lng ${data.location.lng}`);
+      console.log("📩 Received WebSocket message:", data);
+  
+      if (data?.status === "delivered") {
+        this.updateOrderStatus("Delivered to you");
+
+        setTimeout(() => {
+          this.router.navigate([RoutingConstants.MYORDERS]);
+        }, 5000);
+
+        return;
+      }
+  
+      if (data?.event === "orderUpdate" && data?.location) {
+        if (data.location.lat !== lastLocation.lat || data.location.lng !== lastLocation.lng) {
+          lastLocation = { lat: data.location.lat, lng: data.location.lng };
+          this.updateCourierLocation(data.location.lat, data.location.lng);
+          console.log(`📍 Courier moving to: Lat ${data.location.lat}, Lng ${data.location.lng}`);
+        }
       }
     });
   
     setInterval(() => {
-      console.log(`🕒 Last known courier location: Lat ${lastLocation.lat}, Lng ${lastLocation.lng}`);
+      if (lastLocation.lat !== 0 && lastLocation.lng !== 0) {
+        console.log(`🕒 Last known courier location: Lat ${lastLocation.lat}, Lng ${lastLocation.lng}`);
+      }
     }, 5000);
-  }
+  }  
   
+  updateOrderStatus(statusLabel: string): void {
+    const statusIndex = this.order.status.findIndex(status => status.label === statusLabel);
+    if (statusIndex !== -1) {
+      this.order.status[statusIndex].completed = true;
+    }
+  }
+
   loadGoogleMaps(callback: () => void) {
     if (typeof google !== 'undefined') {
       callback();

@@ -1,4 +1,5 @@
-<div class="bg-[#2D2D3A] min-h-screen p-4">
+<div class="bg-[#2D2D3A] min-h-screen p-4 pb-20 flex flex-col justify-between">
+  <!-- Хедер (залишається завжди) -->
   <div class="flex items-center justify-between p-4 text-white">
     <button class="bg-gray-700 p-2 rounded-full flex items-center justify-center">
         <img src="assets/back-icon.png" alt="Back" class="w-5 h-5" />
@@ -14,46 +15,60 @@
     </div>
   </div>
 
-  <div class="space-y-4">
-    <fd-cart-item
-      *ngFor="let item of cartItems"
-      [item]="item"
-      (addonUpdated)="handleAddonUpdate($event)" 
-      (itemUpdated)="updateCart()"
-      (itemRemoved)="removeItem($event)">
-    </fd-cart-item>
-  </div>
-
-  <div class="p-4 mt-6 rounded-lg text-white space-y-3 mb-10">
-    <div class="flex justify-between">
-      <span class="text-gray-400">Subtotal</span>
-      <span class="font-semibold">{{ subtotal | currency:'USD' }}</span>
-    </div>
-
-    <div class="flex justify-between">
-      <span class="text-gray-400">Tax and Fees</span>
-      <span class="font-semibold">{{ tax | currency:'USD' }}</span>
-    </div>
-
-    <div class="flex justify-between">
-      <span class="text-gray-400">Delivery</span>
-      <span class="font-semibold">{{ delivery | currency:'USD' }}</span>
-    </div>
-
-    <div class="border-t border-gray-500 my-2"></div>
-
-    <div class="flex justify-between items-center">
-      <div class="text-gray-300 text-sm">
-        <span class="text-gray-400">(</span> {{ cartItems.length }} items <span class="text-gray-400">)</span>
-      </div>
-      <span class="text-xl font-bold">{{ total | currency:'USD' }}</span>
-    </div>
-  </div>
-  <div class="flex justify-center mt-20">
+  <!-- Якщо корзина пуста -->
+  <div *ngIf="cartItems.length === 0" class="flex flex-col items-center justify-center flex-grow text-white text-lg">
+    <p class="mb-6 text-center text-gray-300 text-xl font-medium">Your cart is empty. Make an order!</p>
     <button 
-      (click)="goToCheckout()"
-      class="w-70 py-4 bg-orange-400 rounded-full text-white/90 font-semibold shadow-lg shadow-orange-500/30 tracking-widest hover:bg-orange-500 transition">
-      CHECKOUT
-    </button>     
- </div> 
+      (click)="navigateToHome()"
+      class="px-8 py-4 bg-orange-400 rounded-full text-white font-semibold shadow-lg tracking-wide hover:bg-orange-500 transition">
+      GO TO MENU
+    </button>
+  </div>
+
+  <!-- Якщо корзина має товари -->
+  <ng-container *ngIf="cartItems.length > 0">
+    <div class="space-y-4">
+      <fd-cart-item
+        *ngFor="let item of cartItems"
+        [item]="item"
+        (addonUpdated)="handleAddonUpdate($event)" 
+        (itemUpdated)="updateCart()"
+        (itemRemoved)="removeItem($event)">
+      </fd-cart-item>
+    </div>
+
+    <div class="p-4 mt-6 rounded-lg text-white space-y-3 mb-10">
+      <div class="flex justify-between">
+        <span class="text-gray-400">Subtotal</span>
+        <span class="font-semibold">{{ subtotal | currency:'USD' }}</span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-gray-400">Tax and Fees</span>
+        <span class="font-semibold">{{ tax | currency:'USD' }}</span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-gray-400">Delivery</span>
+        <span class="font-semibold">{{ delivery | currency:'USD' }}</span>
+      </div>
+
+      <div class="border-t border-gray-500 my-2"></div>
+
+      <div class="flex justify-between items-center">
+        <div class="text-gray-300 text-sm">
+          <span class="text-gray-400">(</span> {{ cartItems.length }} items <span class="text-gray-400">)</span>
+        </div>
+        <span class="text-xl font-bold">{{ total | currency:'USD' }}</span>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-20">
+      <button 
+        (click)="goToCheckout()"
+        class="w-70 py-4 bg-orange-400 rounded-full text-white/90 font-semibold shadow-lg shadow-orange-500/30 tracking-widest hover:bg-orange-500 transition">
+        CHECKOUT
+      </button>     
+    </div> 
+  </ng-container>
 </div>

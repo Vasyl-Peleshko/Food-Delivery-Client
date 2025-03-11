@@ -22,6 +22,6 @@ export class AuthGuard implements CanActivate {
       take(1),
       tap(user => !user && this.router.navigate([RoutingConstants.LOGIN])),
       map(user => !!user),
-    )
+    ) 
   }
 }

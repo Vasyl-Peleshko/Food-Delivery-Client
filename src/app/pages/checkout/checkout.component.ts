@@ -118,8 +118,8 @@ export class CheckoutComponent implements OnInit {
 
     this.orderService.createOrder(orderData).subscribe(response => {
       console.log('✅ Order created successfully:', response);
-      // localStorage.removeItem('cart');
-      // localStorage.removeItem('total');
+      localStorage.removeItem('cartItems');
+      localStorage.removeItem('total');
 
       this.router.navigate([RoutingConstants.ORDERTRACKING]);
 
