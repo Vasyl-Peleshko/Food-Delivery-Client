@@ -12,7 +12,7 @@
       <p class="text-yellow-500 font-bold text-xl">${{ order.totalPrice }}</p>
     </div>
     <div class="flex justify-between mt-6">
-      <button class="bg-gray-700 py-3 px-8 rounded-2xl text-white text-base">Rate</button>
+      <button class="bg-gray-700 py-3 px-8 rounded-2xl text-white text-base" (click)="navigateToFeedBack(order.products[0].restaurantId)">Rate</button>
       <button class="text-gray-400 text-base">Re-Order</button>
     </div>
 </div>

@@ -74,4 +74,8 @@ export class ShoppingCartsComponent implements OnInit, DoCheck {
   goToCheckout() {
     this.router.navigate([`${RoutingConstants.CHECKOUT}`]);
   }
+
+  navigateToHome() {
+    this.router.navigate([`${RoutingConstants.HOME}`]);
+  }
 }

@@ -22,7 +22,12 @@ export class SigninComponent implements OnDestroy  {
   environment = environment;
   public isAuthenticated$ = new Subject<boolean>();
   private fbAuthStateSubscription: Subscription = new Subscription();
+  isPasswordVisible = false;
 
+  togglePasswordVisibility() {
+      this.isPasswordVisible = !this.isPasswordVisible;
+  }
+  
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private facebookService: SocialAuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, emailValidator]],
@@ -65,5 +70,9 @@ export class SigninComponent implements OnDestroy  {
         this.errorMessage = err.error.message || 'Login failed';
       },
     });
+  }
+
+  navigateToSignUp() {
+    this.router.navigate([`${RoutingConstants.SIGNUP}`]); 
   }
 }

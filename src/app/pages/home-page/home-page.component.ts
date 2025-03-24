@@ -34,6 +34,7 @@ export class HomePageComponent implements OnInit {
   categories: string[] = [];
   sortOptions: { label: string, value: string }[] = [];
   ratings: number[] = [];
+  selectedCategory: string | null = null;
 
   constructor(
     private readonly restaurantsService: RestaurantService,
@@ -151,6 +152,14 @@ export class HomePageComponent implements OnInit {
     this.restaurants$ = this.restaurantsService.getFilteredRestaurants({ name: query });
   }
 
+  filterByCategory(category: string) {
+    this.selectedCategory = this.selectedCategory === category ? null : category;
+  
+    const filters = this.selectedCategory ? { categories: [this.selectedCategory] } : {};
+    this.restaurants$ = this.restaurantsService.getFilteredRestaurants(filters);
+  
+  }
+  
   onSearchBlur() {
     const query = this.searchControl.value?.trim();
 

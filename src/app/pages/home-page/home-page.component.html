@@ -58,42 +58,57 @@
         <!-- CATEGORY SELECTION -->
         <div class="overflow-x-auto scrollbar-hide">
             <div class="flex gap-4 w-max px-2">
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#FF6600] text-white">
+                <button (click)="filterByCategory('burger')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'burger', 'bg-[#3B3B4F]': selectedCategory !== 'burger'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/fast-food-icon.png" alt="Burger" class="w-12 h-12">
                     <span>Burger</span>
                 </button>
-    
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+        
+                <button (click)="filterByCategory('donut')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'donut', 'bg-[#3B3B4F]': selectedCategory !== 'donut'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/donut-icon.png" alt="Donut" class="w-12 h-12">
                     <span>Donut</span>
                 </button>
-    
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+        
+                <button (click)="filterByCategory('pizza')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'pizza', 'bg-[#3B3B4F]': selectedCategory !== 'pizza'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/pizza-icon.png" alt="Pizza" class="w-12 h-12">
                     <span>Pizza</span>
                 </button>
-    
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+        
+                <button (click)="filterByCategory('mexican')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'mexican', 'bg-[#3B3B4F]': selectedCategory !== 'mexican'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/mexican-icon.png" alt="Mexican" class="w-12 h-12">
                     <span>Mexican</span>
                 </button>
-    
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+        
+                <button (click)="filterByCategory('asian')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'asian', 'bg-[#3B3B4F]': selectedCategory !== 'asian'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/asian-icon.png" alt="Asian" class="w-12 h-12">
                     <span>Asian</span>
                 </button>
-    
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+        
+                <button (click)="filterByCategory('sushi')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'sushi', 'bg-[#3B3B4F]': selectedCategory !== 'sushi'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/sushi-icon.png" alt="Sushi" class="w-12 h-12">
                     <span>Sushi</span>
                 </button>
-    
-                <button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#3B3B4F] text-white">
+        
+                <button (click)="filterByCategory('dessert')" 
+                        [ngClass]="{'bg-[#FF6600]': selectedCategory === 'dessert', 'bg-[#3B3B4F]': selectedCategory !== 'dessert'}"
+                        class="flex flex-col items-center gap-2 p-4 rounded-xl text-white">
                     <img src="assets/dessert-icon.png" alt="Dessert" class="w-12 h-12">
                     <span>Dessert</span>
                 </button>
             </div>
         </div>
+        
         <!-- FEATURED RESTAURANTS SECTION -->
         <div>
             <span class="text-white text-xl font-light ml-3">
@@ -255,7 +270,7 @@
         <!-- Rating -->
         <div class="mb-6">
             <h3 class="text-md font-medium mb-3">Rating</h3>
-            <div class="flex gap-3">
+            <div class="flex gap-2">
                 <button *ngFor="let rating of ratings"
                     (click)="selectRating(rating)"
                     [class.selected]="ratingControl.value === rating"

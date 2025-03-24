@@ -15,6 +15,11 @@ import { emailValidator, nameValidator, passwordValidator } from '../../shared/v
 export class SignupComponent {
   registerForm: FormGroup;
   errorMessage?: string = '';
+  isPasswordVisible = false;
+
+  togglePasswordVisibility() {
+      this.isPasswordVisible = !this.isPasswordVisible;
+  }
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
@@ -35,5 +40,9 @@ export class SignupComponent {
         this.errorMessage = err.error.message || 'Registration failed';
       }
     });
+  }
+
+  navigateToSignIn() {
+    this.router.navigate([`${RoutingConstants.LOGIN}`]); 
   }
 }

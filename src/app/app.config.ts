@@ -11,6 +11,8 @@ import { environment } from '../environments/environment';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { ServerResponseInterceptor } from './shared/interceptors/server-response.interceptor';
 import { provideNgxStripe } from 'ngx-stripe';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +20,13 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
+    provideAnimations(),
+    provideToastr({
+      positionClass: 'toast-bottom-left',
+      timeOut: 3000, 
+      preventDuplicates: true, 
+      progressBar: true 
+    }),
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
