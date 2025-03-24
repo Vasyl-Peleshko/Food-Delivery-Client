@@ -1,0 +1,26 @@
+<div class="min-h-screen bg-[#2D2D3A] text-white p-4">
+    <div class="flex justify-center mb-4">
+      <div class="flex rounded-full p-1 w-72">
+        <button 
+          (click)="setActiveTab('upcoming')"
+          [class.bg-gray-700]="activeTab === 'upcoming'"
+          [class.text-white]="activeTab === 'upcoming'"
+          [class.text-gray-300]="activeTab !== 'upcoming'"
+          class="flex-1 py-2 text-center rounded-full">
+          Upcoming
+        </button>
+        <button 
+          (click)="setActiveTab('history')"
+          [class.bg-gray-700]="activeTab === 'history'"
+          [class.text-white]="activeTab === 'history'"
+          [class.text-gray-300]="activeTab !== 'history'"
+          class="flex-1 py-2 text-center rounded-full">
+          History
+        </button>
+      </div>
+    </div>
+  
+    <div class="space-y-6 min-h-screen flex flex-col items-center p-6">
+      <fd-order-card *ngFor="let order of filteredOrders" [order]="order"></fd-order-card>
+    </div>      
+</div>

@@ -165,7 +165,12 @@
 
     <nav class="mt-6">
         <ul class="space-y-7">
-            <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3">
+            <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3"
+                (click)="navigateToMyOrders()"
+                (keydown.enter)="navigateToProfile()"
+                (keydown.space)="navigateToProfile()"
+                role="button"
+                tabindex="0">
                 📦 <span>My Orders</span>
             </li>
             <li class="text-gray-300 cursor-pointer text-lg flex items-center gap-3"
